@@ -4,6 +4,7 @@ import org.hibernate.jpa.AvailableSettings;
 import org.reflections.Reflections;
 import sad.teamone.common.annotation.Bean;
 import sad.teamone.common.annotation.Configuration;
+import sad.teamone.common.util.ProjectReflections;
 import sad.teamone.dao.*;
 import sad.teamone.dao.impl.*;
 import sad.teamone.service.*;
@@ -113,7 +114,7 @@ public class AppConfig {
     /*************      support methods  *********************/
     /*********************************************************/
     private List<Class> getScannedEntityClass() {
-        Reflections reflections = new Reflections("sad.teamone");
+        Reflections reflections = ProjectReflections.INSTANCE.getReflections();
         Set<Class<?>> classes = reflections.getTypesAnnotatedWith(Entity.class);
         List<Class> result = new ArrayList<Class>();
         result.addAll(classes);
