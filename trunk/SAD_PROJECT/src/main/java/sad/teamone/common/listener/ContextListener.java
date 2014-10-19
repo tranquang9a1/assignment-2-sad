@@ -9,7 +9,9 @@ import sad.teamone.common.annotation.*;
 import sad.teamone.common.bean.BeanDefinition;
 import sad.teamone.common.constant.RequestMethod;
 import sad.teamone.common.util.ActionMap;
+import sad.teamone.common.util.ProjectReflections;
 
+import javax.persistence.EntityManagerFactory;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
@@ -28,7 +30,7 @@ public class ContextListener implements ServletContextListener {
 
     protected static final Logger LOG = LoggerFactory.getLogger(ContextListener.class);
 
-    protected static final Reflections reflections = new Reflections("sad.teamone");
+    protected static final Reflections reflections = ProjectReflections.INSTANCE.getReflections();
 
     protected static final List<BeanDefinition> beanList = new ArrayList<BeanDefinition>();
 
@@ -57,7 +59,7 @@ public class ContextListener implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
-
+        closeEntityManagerFactory();
     }
 
     /****************************************************************/
@@ -71,7 +73,7 @@ public class ContextListener implements ServletContextListener {
      * by @Configuration
      */
 
-    public void scanAndInitConfiguration() throws InstantiationException, InvocationTargetException,
+    protected void scanAndInitConfiguration() throws InstantiationException, InvocationTargetException,
             IllegalAccessException {
         Set<Class<?>> classes = reflections.getTypesAnnotatedWith(Configuration.class);
 
@@ -95,13 +97,13 @@ public class ContextListener implements ServletContextListener {
     /**
      *
      */
-    public void doAutowiredForBeans() throws IllegalAccessException {
+    protected void doAutowiredForBeans() throws IllegalAccessException {
         for (BeanDefinition bean : beanList) {
             doAutowired(bean.getReference());
         }
     }
 
-    public void doAutowired(Object obj) throws IllegalAccessException {
+    protected void doAutowired(Object obj) throws IllegalAccessException {
         Class<?> clazz = obj.getClass();
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
@@ -189,4 +191,30 @@ public class ContextListener implements ServletContextListener {
             }
         }
     }
+
+    /**
+     * This method will find the EntityManagerFactory in beanList
+     * @return EntityManagerFactory
+     */
+    protected EntityManagerFactory findEntityManagerFactory() {
+        for (BeanDefinition beanDefinition : beanList) {
+            Object obj = beanDefinition.getReference();
+            if (obj instanceof EntityManagerFactory) {
+                return (EntityManagerFactory) obj;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * This method will close the EntityManagerFactory
+     */
+    protected void closeEntityManagerFactory() {
+        EntityManagerFactory emf = findEntityManagerFactory();
+        if (emf != null) {
+            emf.close();
+        }
+    }
+
+
 }
