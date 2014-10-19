@@ -4,11 +4,10 @@ import org.hibernate.jpa.AvailableSettings;
 import org.reflections.Reflections;
 import sad.teamone.common.annotation.Bean;
 import sad.teamone.common.annotation.Configuration;
-import sad.teamone.dao.HelloDAO;
-import sad.teamone.dao.TestDAO;
-import sad.teamone.service.TestService;
-import sad.teamone.service.TestService1;
-import sad.teamone.service.TestService2;
+import sad.teamone.dao.*;
+import sad.teamone.dao.impl.*;
+import sad.teamone.service.*;
+import sad.teamone.service.impl.*;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityManagerFactory;
@@ -33,6 +32,7 @@ public class AppConfig {
         return emf;
     }
 
+    //Service Bean
     @Bean(name = "service1")
     public TestService getTestService() {
         return new TestService1();
@@ -44,10 +44,70 @@ public class AppConfig {
     }
 
     @Bean
+    public CategoryService categoryService() {
+        return new CategoryServiceImpl();
+    }
+
+    @Bean
+    public CommentService commentService() {
+        return new CommentServiceImpl();
+    }
+
+    @Bean
+    public JobService jobService() {
+        return new JobServiceImpl();
+    }
+
+    @Bean
+    public NotifyService notifyService() {
+        return new NotifyServiceImpl();
+    }
+
+    @Bean
+    public SkillService skillService() {
+        return new SkillServiceImpl();
+    }
+
+    @Bean
+    public UserService userService() {
+        return new UserServiceImpl();
+    }
+
+    // DAO Bean
+
+    @Bean
     public TestDAO getTestDAO() {
         return new HelloDAO();
     }
 
+    @Bean
+    public CategoryDAO categoryDAO() {
+        return  new CategoryDAOImpl();
+    }
+
+    @Bean
+    public CommentDAO commentDAO() {
+        return new CommentDAOImpl();
+    }
+
+    @Bean
+    public JobDAO jobDAO() {
+        return new JobDAOImpl();
+    }
+
+    @Bean
+    public NotifyDAO notifyDAO() {
+        return new NotifyDAOImpl();
+    }
+
+    @Bean
+    public SkillDAO skillDAO() {
+        return new SkillDAOImpl();
+    }
+
+    @Bean UserDAO userDAO() {
+        return new UserDAOImpl();
+    }
 
     /*********************************************************/
     /*************      support methods  *********************/
