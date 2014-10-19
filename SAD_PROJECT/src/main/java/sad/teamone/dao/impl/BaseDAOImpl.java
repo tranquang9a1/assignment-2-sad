@@ -1,19 +1,19 @@
 package sad.teamone.dao.impl;
 
+import sad.teamone.common.annotation.Autowired;
 import sad.teamone.dao.BaseDAO;
 
-import javax.persistence.EntityManager;
+import javax.persistence.*;
 
 import javax.persistence.EntityManager;
-import javax.persistence.FlushModeType;
-import javax.persistence.PersistenceContext;
 import java.lang.reflect.ParameterizedType;
 
 /**
  * Created by QuangTV on 10/19/2014.
  */
 public abstract class BaseDAOImpl<T> implements BaseDAO<T>{
-    protected EntityManager em;
+    @Autowired
+    protected EntityManagerFactory emf;
 
     private Class<T> entityClass;
 
@@ -22,49 +22,103 @@ public abstract class BaseDAOImpl<T> implements BaseDAO<T>{
         this.entityClass = (Class<T>) genericSuperclass.getActualTypeArguments()[0];
     }
 
-    @PersistenceContext
-    public void setEm(EntityManager em) {
-        this.em = em;
-        this.em.setFlushMode(FlushModeType.COMMIT);
-    }
 
     @Override
     public T insert(T entity) {
-        em.persist(entity);
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(entity);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+        } finally {
+            em.close();
+        }
         return entity;
     }
 
     @Override
     public T update(T entity) {
-        em.merge(entity);
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.merge(entity);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+        } finally {
+            em.close();
+        }
         return entity;
     }
 
     @Override
     public T delete(Integer key) {
-        T entity = find(key);
-        if (entity != null) {
-            em.remove(entity);
+        EntityManager em = emf.createEntityManager();
+        T entity = null;
+        try {
+            em.getTransaction().begin();
+            entity = find(key);
+            if (entity != null) {
+                em.remove(entity);
+            }
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+        } finally {
+            em.close();
         }
         return entity;
     }
 
     @Override
     public T delete(T entity) {
-        if (entity != null) {
-            em.remove(entity);
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            if (entity != null) {
+                em.remove(entity);
+            }
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+        } finally {
+            em.close();
         }
+
         return entity;
     }
 
     @Override
     public T find(Integer key) {
-        T result = em.find(entityClass, key);
+        EntityManager em = emf.createEntityManager();
+        T result = null;
+        try {
+            em.getTransaction().begin();
+            result = em.find(entityClass, key);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+        } finally {
+            em.close();
+        }
+
         return result;
     }
 
     @Override
     public void flush()  {
-        em.flush();
+//        em.flush();
     }
 }
