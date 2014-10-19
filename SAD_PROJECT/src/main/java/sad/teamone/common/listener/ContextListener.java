@@ -95,7 +95,8 @@ public class ContextListener implements ServletContextListener {
     }
 
     /**
-     *
+     * This method will autowired for all beans in beanList
+     * @throws IllegalAccessException
      */
     protected void doAutowiredForBeans() throws IllegalAccessException {
         for (BeanDefinition bean : beanList) {
@@ -103,6 +104,11 @@ public class ContextListener implements ServletContextListener {
         }
     }
 
+    /**
+     * This method will autowired a object base on list bean
+     * @param obj
+     * @throws IllegalAccessException
+     */
     protected void doAutowired(Object obj) throws IllegalAccessException {
         Class<?> clazz = obj.getClass();
         Field[] fields = clazz.getDeclaredFields();
