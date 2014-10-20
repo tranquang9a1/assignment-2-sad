@@ -34,16 +34,6 @@ public class AppConfig {
     }
 
     //Service Bean
-    @Bean(name = "service1")
-    public TestService getTestService() {
-        return new TestService1();
-    }
-
-    @Bean(name = "service2")
-    public TestService getTestService2() {
-        return new TestService2();
-    }
-
     @Bean
     public CategoryService categoryService() {
         return new CategoryServiceImpl();
@@ -75,12 +65,6 @@ public class AppConfig {
     }
 
     // DAO Bean
-
-    @Bean
-    public TestDAO getTestDAO() {
-        return new HelloDAO();
-    }
-
     @Bean
     public CategoryDAO categoryDAO() {
         return  new CategoryDAOImpl();
@@ -120,5 +104,4 @@ public class AppConfig {
         result.addAll(classes);
         return result;
     }
-
 }
