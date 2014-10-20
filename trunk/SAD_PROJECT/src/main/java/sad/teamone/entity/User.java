@@ -30,14 +30,21 @@ public class User {
     private boolean sex;
     @Column(name = "address")
     private String address;
+
+    @Column(name = "isAdmin")
+    private boolean isAdmin;
+
     @Column(name = "create_date")
     private Date create_date;
+
+
 
 
     public User() {
     }
 
-    public User(String username, String password, String email, int age, String description, String avatar, boolean sex, String address, Date create_date) {
+
+    public User(String username, String password, String email, int age, String description, String avatar, boolean sex, String address, boolean isAdmin, Date create_date) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -46,6 +53,7 @@ public class User {
         this.avatar = avatar;
         this.sex = sex;
         this.address = address;
+        this.isAdmin = isAdmin;
         this.create_date = create_date;
     }
 
@@ -127,5 +135,13 @@ public class User {
 
     public void setCreate_date(Date create_date) {
         this.create_date = create_date;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 }
