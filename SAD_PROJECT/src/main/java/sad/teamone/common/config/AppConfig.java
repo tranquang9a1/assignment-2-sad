@@ -34,32 +34,32 @@ public class AppConfig {
     }
 
     //Service Bean
-    @Bean
+    @Bean(name = "categoryService")
     public CategoryService categoryService() {
         return new CategoryServiceImpl();
     }
 
-    @Bean
+    @Bean(name = "commentService")
     public CommentService commentService() {
         return new CommentServiceImpl();
     }
 
-    @Bean
+    @Bean(name = "jobService")
     public JobService jobService() {
         return new JobServiceImpl();
     }
 
-    @Bean
+    @Bean(name = "notifyService")
     public NotifyService notifyService() {
         return new NotifyServiceImpl();
     }
 
-    @Bean
+    @Bean(name = "skillService")
     public SkillService skillService() {
         return new SkillServiceImpl();
     }
 
-    @Bean
+    @Bean(name = "userService")
     public UserService userService() {
         return new UserServiceImpl();
     }
