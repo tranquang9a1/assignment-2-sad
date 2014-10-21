@@ -5,6 +5,8 @@ import sad.teamone.dao.CommentDAO;
 import sad.teamone.entity.Comment;
 import sad.teamone.service.CommentService;
 
+import java.util.List;
+
 /**
  * Created by QuangTV on 10/19/2014.
  */
@@ -39,5 +41,10 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Comment find(int id) {
         return (Comment) commentDAO.find(id);
+    }
+
+    @Override
+    public List findByJobId(int jobID){
+        return commentDAO.findByJobId(jobID);
     }
 }
