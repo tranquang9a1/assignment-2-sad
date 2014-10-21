@@ -5,6 +5,8 @@ import sad.teamone.dao.JobDAO;
 import sad.teamone.entity.Job;
 import sad.teamone.service.JobService;
 
+import java.util.List;
+
 /**
  * Created by QuangTV on 10/19/2014.
  */
@@ -36,5 +38,35 @@ public class JobServiceImpl implements JobService {
     @Override
     public Job find(int id) {
         return (Job) jobDAO.find(id);
+    }
+
+    @Override
+    public List findAll() {
+        return jobDAO.findAll();
+    }
+
+    @Override
+    public List findByName(String jobName) {
+        return jobDAO.findByName(jobName);
+    }
+
+    @Override
+    public List findByCategory(int categoryId) {
+        return jobDAO.findByCategory(categoryId);
+    }
+
+    @Override
+    public List findBySalary(int min, int max) {
+        return jobDAO.findBySalary(min, max);
+    }
+
+    @Override
+    public List findByStatus(Boolean status) {
+        return jobDAO.findByStatus(status);
+    }
+
+    @Override
+    public List findUserId(int userID) {
+        return jobDAO.findUserId(userID);
     }
 }
