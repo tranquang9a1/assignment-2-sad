@@ -11,26 +11,18 @@ import java.util.List;
  * Created by QuangTV on 10/19/2014.
  */
 public class JobDAOImpl extends BaseDAOImpl<Job> implements JobDAO<Job> {
-    private static final String JOB = "Job";
     private EntityManager em = emf.createEntityManager();
 
     @Override
     public List findByName(String jobName) {
-        Query query = em.createQuery("Select e From " + JOB + " e where e.jobName like :jobName");
+        Query query = em.createQuery("Select e From Job e where e.jobName like :jobName");
         query.setParameter("jobName","%" + jobName + "%");
         return query.getResultList();
     }
 
     @Override
-    public List findByCategory(int categoryId) {
-        Query query = em.createQuery("Select e From " + JOB + " e where e.categoryID =:categoryId");
-        query.setParameter("categoryId", categoryId);
-        return query.getResultList();
-    }
-
-    @Override
     public List findBySalary(int min, int max) {
-        Query query = em.createQuery("Select e From " + JOB + " e where (e.salary >=:minSalary and e.salary <=:maxSalary)");
+        Query query = em.createQuery("Select e From Job e where (e.salary >=:minSalary and e.salary <=:maxSalary)");
         query.setParameter("minSalary", min);
         query.setParameter("maxSalary", max);
         return query.getResultList();
@@ -38,14 +30,14 @@ public class JobDAOImpl extends BaseDAOImpl<Job> implements JobDAO<Job> {
 
     @Override
     public List findByStatus(Boolean status) {
-        Query query = em.createQuery("Select e From " + JOB + " e where e.status =:status");
+        Query query = em.createQuery("Select e From Job e where e.status =:status");
         query.setParameter("status", status);
         return query.getResultList();
     }
 
     @Override
     public List findUserId(int userID) {
-        Query query = em.createQuery("Select e From " + JOB + " e where e.userID =:userID");
+        Query query = em.createQuery("Select e From Job e where e.userID =:userID");
         query.setParameter("userID", userID);
         return query.getResultList();
     }

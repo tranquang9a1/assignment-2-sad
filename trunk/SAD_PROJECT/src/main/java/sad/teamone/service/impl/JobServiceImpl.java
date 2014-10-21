@@ -51,11 +51,6 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public List findByCategory(int categoryId) {
-        return jobDAO.findByCategory(categoryId);
-    }
-
-    @Override
     public List findBySalary(int min, int max) {
         return jobDAO.findBySalary(min, max);
     }

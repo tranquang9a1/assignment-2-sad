@@ -16,7 +16,6 @@ public interface JobService {
     Job find(int id);
     List findAll();
     List findByName(String jobName);
-    List findByCategory(int categoryId);
     List findBySalary(int min, int max);
     List findByStatus(Boolean status);
     List findUserId(int userID);

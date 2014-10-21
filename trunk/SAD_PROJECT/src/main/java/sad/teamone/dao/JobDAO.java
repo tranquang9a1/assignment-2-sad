@@ -7,7 +7,6 @@ import java.util.List;
  */
 public interface JobDAO<Job> extends BaseDAO<Job>{
     List findByName(String jobName);
-    List findByCategory(int categoryId);
     List findBySalary(int min, int max);
     List findByStatus(Boolean status);
     List findUserId(int userID);
