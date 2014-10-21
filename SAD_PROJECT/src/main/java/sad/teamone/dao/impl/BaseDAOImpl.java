@@ -7,13 +7,15 @@ import javax.persistence.*;
 
 import javax.persistence.EntityManager;
 import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by QuangTV on 10/19/2014.
  */
-public abstract class BaseDAOImpl<T> implements BaseDAO<T>{
+public abstract class BaseDAOImpl<T> implements BaseDAO<T> {
     @Autowired
-    protected EntityManagerFactory emf;
+    protected EntityManagerFactory emf = Persistence.createEntityManagerFactory("defaultPersistenceUnit");
 
     private Class<T> entityClass;
 
@@ -99,7 +101,7 @@ public abstract class BaseDAOImpl<T> implements BaseDAO<T>{
     }
 
     @Override
-    public T find(Integer key) {
+    public T find(int key) {
         EntityManager em = emf.createEntityManager();
         T result = null;
         try {
@@ -118,7 +120,26 @@ public abstract class BaseDAOImpl<T> implements BaseDAO<T>{
     }
 
     @Override
-    public void flush()  {
+    public List findAll() {
+        EntityManager em = emf.createEntityManager();
+        List result = new ArrayList<T>();
+        try {
+            em.getTransaction().begin();
+            Query query = em.createQuery("Select e From " + entityClass.getSimpleName() + " e");
+            result = query.getResultList();
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+        } finally {
+            em.close();
+        }
+        return result;
+    }
+
+    @Override
+    public void flush() {
 //        em.flush();
     }
 }
