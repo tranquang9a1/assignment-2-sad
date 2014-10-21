@@ -17,11 +17,7 @@ import java.io.IOException;
 public class UserController {
 
     @RequestMapping(url = "/")
-    public void index(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        response.setContentType("UTF-8");
-        ServletContext context=request.getServletContext();
-        RequestDispatcher requestDispatcher=context.getRequestDispatcher("index.html");
-        requestDispatcher.forward(request, response);
-
+    public String index(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        return "index.html";
     }
 }
