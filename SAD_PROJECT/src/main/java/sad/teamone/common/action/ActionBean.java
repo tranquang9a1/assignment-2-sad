@@ -50,6 +50,7 @@ public class ActionBean implements Action {
         this.object = object;
     }
 
+    @Override
     public Method getMethod() {
         return method;
     }
