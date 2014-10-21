@@ -13,16 +13,16 @@ public class Notify {
     @Id
     @GeneratedValue
     @Column(name = "notifyID")
-    private int notifyID;
+    private Integer notifyID;
 
     @Column(name = "content")
     private String content; //Noi dung se notify
 
     @Column(name = "userID")
-    private int userID;
+    private Integer userID;
 
     @Column(name = "status")
-    private boolean status;
+    private Boolean status;
 
     @Column(name = "create_date")
     private Date create_date;
@@ -36,11 +36,11 @@ public class Notify {
     }
 
     // Getters and setters
-    public int getNotifyID() {
+    public Integer getNotifyID() {
         return notifyID;
     }
 
-    public void setNotifyID(int notifyID) {
+    public void setNotifyID(Integer notifyID) {
         this.notifyID = notifyID;
     }
 
@@ -52,19 +52,19 @@ public class Notify {
         this.content = content;
     }
 
-    public int getUserID() {
+    public Integer getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(Integer userID) {
         this.userID = userID;
     }
 
-    public boolean isStatus() {
+    public Boolean isStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 

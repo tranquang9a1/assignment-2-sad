@@ -14,7 +14,7 @@ public class Category {
     @Id
     @GeneratedValue
     @Column(name = "categoryID")
-    private int categoryID;
+    private Integer categoryID;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "tbl_job_category",
@@ -28,6 +28,7 @@ public class Category {
     @Column(name = "categoryName")
     private String categoryName;
 
+    // Constructors
     public Category(String categoryName) {
         this.categoryName = categoryName;
     }
@@ -35,20 +36,13 @@ public class Category {
     public Category() {
     }
 
-    public int getCategoryID() {
+    // Getters and setters
+    public Integer getCategoryID() {
         return categoryID;
     }
 
-    public void setCategoryID(int categoryID) {
+    public void setCategoryID(Integer categoryID) {
         this.categoryID = categoryID;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
     }
 
     public List<Job> getJobs() {
@@ -57,5 +51,13 @@ public class Category {
 
     public void setJobs(List<Job> jobs) {
         this.jobs = jobs;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 }

@@ -15,7 +15,7 @@ public class Job {
     @Id
     @GeneratedValue
     @Column(name = "jobID")
-    private int jobID;
+    private Integer jobID;
 
     @Column(name = "jobName")
     private String jobName;
@@ -30,16 +30,16 @@ public class Job {
     private String address;
 
     @Column(name = "jobSalary") // Tien luong du kien
-    private int salary;
+    private Integer salary;
 
     @Column(name = "numberUser")
-    private int numberUser; // So luong nguoi can tuyen.
+    private Integer numberUser; // So luong nguoi can tuyen.
 
     @Column(name = "status")
-    private boolean status;
+    private Boolean status;
 
     @Column(name = "userID")
-    private int userID;
+    private Integer userID;
 
     @Column(name = "deadline")
     private Date deadline;
@@ -58,14 +58,16 @@ public class Job {
     @JoinColumn(name = "jobID")
     private List<JobApplied> jobApplieds = new ArrayList<JobApplied>();
 
+    // Constructors
     public Job() {
     }
 
-    public int getJobID() {
+    // Getters and setters
+    public Integer getJobID() {
         return jobID;
     }
 
-    public void setJobID(int jobID) {
+    public void setJobID(Integer jobID) {
         this.jobID = jobID;
     }
 
@@ -101,35 +103,35 @@ public class Job {
         this.address = address;
     }
 
-    public int getSalary() {
+    public Integer getSalary() {
         return salary;
     }
 
-    public void setSalary(int salary) {
+    public void setSalary(Integer salary) {
         this.salary = salary;
     }
 
-    public int getNumberUser() {
+    public Integer getNumberUser() {
         return numberUser;
     }
 
-    public void setNumberUser(int numberUser) {
+    public void setNumberUser(Integer numberUser) {
         this.numberUser = numberUser;
     }
 
-    public boolean isStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 
-    public int getUserID() {
+    public Integer getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(Integer userID) {
         this.userID = userID;
     }
 
@@ -163,5 +165,13 @@ public class Job {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public List<JobApplied> getJobApplieds() {
+        return jobApplieds;
+    }
+
+    public void setJobApplieds(List<JobApplied> jobApplieds) {
+        this.jobApplieds = jobApplieds;
     }
 }

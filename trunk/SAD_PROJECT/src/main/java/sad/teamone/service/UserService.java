@@ -11,4 +11,6 @@ public interface UserService {
     User delete(User user);
     User remove(int i);
     User find(int id);
+
+    User checkLogin(String username, String password);
 }

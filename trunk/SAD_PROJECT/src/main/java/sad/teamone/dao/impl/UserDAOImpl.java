@@ -22,7 +22,6 @@ public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO<User> {
             User user = (User)query.getSingleResult();
             return user;
         }catch (NoResultException ex) {
-
             ex.printStackTrace();
             return null;
         }
