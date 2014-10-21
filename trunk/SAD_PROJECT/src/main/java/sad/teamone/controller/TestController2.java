@@ -14,7 +14,7 @@ import java.io.PrintWriter;
 @Controller
 @RequestMapping(url = "/test")
 public class TestController2 {
-    @RequestMapping(url = "/tuyen")
+    @RequestMapping(url = "/tuyen.do")
     public void test(HttpServletRequest request, HttpServletResponse response) throws IOException {
         PrintWriter writer = response.getWriter();
         writer.print("Test Tuyen");
