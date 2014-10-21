@@ -1,7 +1,9 @@
 package sad.teamone.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by QuangTV on 10/19/2014.
@@ -33,9 +35,6 @@ public class Job {
     @Column(name = "numberUser")
     private int numberUser; // So luong nguoi can tuyen.
 
-    @Column(name = "categoryID")
-    private int categoryID;
-
     @Column(name = "status")
     private boolean status;
 
@@ -48,20 +47,16 @@ public class Job {
     @Column(name = "create_date")
     private Date create_date;
 
-    public Job(String jobName, String jobDescription, String jobRequirement, String address, int salary, int numberUser,
-               int categoryID, boolean status, int userID, Date deadline, Date create_date) {
-        this.jobName = jobName;
-        this.jobDescription = jobDescription;
-        this.jobRequirement = jobRequirement;
-        this.address = address;
-        this.salary = salary;
-        this.numberUser = numberUser;
-        this.categoryID = categoryID;
-        this.status = status;
-        this.userID = userID;
-        this.deadline = deadline;
-        this.create_date = create_date;
-    }
+    @ManyToMany(mappedBy = "jobs", fetch = FetchType.LAZY)
+    private List<Category> categories = new ArrayList<Category>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "jobID")
+    private List<Comment> comments = new ArrayList<Comment>();
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "jobID")
+    private List<JobApplied> jobApplieds = new ArrayList<JobApplied>();
 
     public Job() {
     }
@@ -122,14 +117,6 @@ public class Job {
         this.numberUser = numberUser;
     }
 
-    public int getCategoryID() {
-        return categoryID;
-    }
-
-    public void setCategoryID(int categoryID) {
-        this.categoryID = categoryID;
-    }
-
     public boolean isStatus() {
         return status;
     }
@@ -160,5 +147,21 @@ public class Job {
 
     public void setCreate_date(Date create_date) {
         this.create_date = create_date;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

@@ -26,4 +26,61 @@ public class Notify {
 
     @Column(name = "create_date")
     private Date create_date;
+
+    @ManyToOne
+    @JoinColumn(nullable=false, updatable=false)
+    private User user;
+
+    // Constructors
+    public Notify() {
+    }
+
+    // Getters and setters
+    public int getNotifyID() {
+        return notifyID;
+    }
+
+    public void setNotifyID(int notifyID) {
+        this.notifyID = notifyID;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public Date getCreate_date() {
+        return create_date;
+    }
+
+    public void setCreate_date(Date create_date) {
+        this.create_date = create_date;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

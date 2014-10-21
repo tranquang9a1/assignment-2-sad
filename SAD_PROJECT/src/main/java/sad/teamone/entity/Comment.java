@@ -18,21 +18,12 @@ public class Comment {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "jobID")
-    private int jobID;
-
-    @Column(name = "userID")
-    private int userID;
-
     @Column(name = "create_date")
     private Date create_date;
 
-    public Comment(String description, int jobID, int userID, Date create_date) {
-        this.description = description;
-        this.jobID = jobID;
-        this.userID = userID;
-        this.create_date = create_date;
-    }
+    @OneToOne
+    @JoinColumn(name = "userID",nullable = false)
+    private User user;
 
     public Comment() {
     }
@@ -53,27 +44,19 @@ public class Comment {
         this.description = description;
     }
 
-    public int getJobID() {
-        return jobID;
-    }
-
-    public void setJobID(int jobID) {
-        this.jobID = jobID;
-    }
-
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
-
     public Date getCreate_date() {
         return create_date;
     }
 
     public void setCreate_date(Date create_date) {
         this.create_date = create_date;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
