@@ -1,7 +1,9 @@
 package sad.teamone.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by QuangTV on 10/19/2014.
@@ -14,7 +16,7 @@ public class User {
     @GeneratedValue
     @Column(name = "userID")
     private int userID;
-    @Column(name = "username")
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
     @Column(name = "password")
     private String password;
@@ -37,24 +39,26 @@ public class User {
     @Column(name = "create_date")
     private Date create_date;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "tbl_user_skill",
+            joinColumns =
+                    @JoinColumn(name = "userID", referencedColumnName = "userID"),
+            inverseJoinColumns =
+                    @JoinColumn(name = "skillID", referencedColumnName = "skillID")
+    )
+    private List<Skill> skills = new ArrayList<Skill>();
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "userID")
+    private List<JobApplied> jobApplieds = new ArrayList<JobApplied>();
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    private List<Notify> notifies = new ArrayList<Notify>();
 
 
-
+    // Constructors
     public User() {
-    }
-
-
-    public User(String username, String password, String email, int age, String description, String avatar, boolean sex, String address, boolean isAdmin, Date create_date) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.age = age;
-        this.description = description;
-        this.avatar = avatar;
-        this.sex = sex;
-        this.address = address;
-        this.isAdmin = isAdmin;
-        this.create_date = create_date;
     }
 
     public int getUserID() {
@@ -143,5 +147,21 @@ public class User {
 
     public void setAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
+    }
+
+    public List<Skill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<Skill> skills) {
+        this.skills = skills;
+    }
+
+    public List<JobApplied> getJobApplieds() {
+        return jobApplieds;
+    }
+
+    public void setJobApplieds(List<JobApplied> jobApplieds) {
+        this.jobApplieds = jobApplieds;
     }
 }
