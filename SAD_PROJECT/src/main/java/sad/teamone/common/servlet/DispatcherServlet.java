@@ -15,7 +15,7 @@ import java.io.IOException;
 /**
  * Created by Tuyen on 10/10/2014.
  */
-@WebServlet(name = "dispatcherServlet", urlPatterns = "/*")
+@WebServlet(name = "dispatcherServlet", urlPatterns = "*.do")
 public class DispatcherServlet extends HttpServlet {
 
     protected static final Logger LOG = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -37,7 +37,6 @@ public class DispatcherServlet extends HttpServlet {
                     // todo: change to json
                 }
             }
-
         } else {
             res.sendError(HttpServletResponse.SC_NOT_FOUND);
             LOG.error("Resource " +  req.getRequestURL()  +" not found.");

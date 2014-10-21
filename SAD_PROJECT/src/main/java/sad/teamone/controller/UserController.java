@@ -16,8 +16,8 @@ import java.io.IOException;
 @Controller
 public class UserController {
 
-    @RequestMapping(url = "/")
+    @RequestMapping(url = "/signin.do")
     public String index(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        return "index.html";
+        return "signin.jsp";
     }
 }
