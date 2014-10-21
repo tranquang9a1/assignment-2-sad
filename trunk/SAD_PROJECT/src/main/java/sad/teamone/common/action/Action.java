@@ -9,5 +9,5 @@ import java.io.IOException;
  * Created by Tuyen on 10/16/2014.
  */
 public interface Action {
-    public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+    public Object service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 }

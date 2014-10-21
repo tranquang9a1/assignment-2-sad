@@ -29,7 +29,15 @@ public class DispatcherServlet extends HttpServlet {
         LOG.info("Request to: " + uri);
 
         if (action != null) {
-             action.service(req, res);
+            Object result = action.service(req, res);
+            if (result != null) {
+                if (result instanceof String) {
+                    req.getRequestDispatcher((String)result).forward(req, res);
+                } else {
+                    // todo: change to json
+                }
+            }
+
         } else {
             res.sendError(HttpServletResponse.SC_NOT_FOUND);
             LOG.error("Resource " +  req.getRequestURL()  +" not found.");

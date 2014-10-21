@@ -30,13 +30,15 @@ public class ActionBean implements Action {
     }
 
     @Override
-    public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public Object service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Object result = null;
         try {
-            method.invoke(object, request, response);
+            result = method.invoke(object, request, response);
         } catch (Exception ex) {
             LOG.error("Error when invoking request resolver method. Stack trace: ", ex.getMessage());
             ex.printStackTrace();
         }
+        return result;
     }
 
     // Getters and setters
