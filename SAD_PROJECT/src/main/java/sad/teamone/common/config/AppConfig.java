@@ -90,7 +90,9 @@ public class AppConfig {
         return new SkillDAOImpl();
     }
 
-    @Bean UserDAO userDAO() {
+
+    @Bean(name = "userDAO")
+    public UserDAO userDAO() {
         return new UserDAOImpl();
     }
 

@@ -13,7 +13,7 @@ public class Comment {
     @Id
     @GeneratedValue
     @Column(name = "commentID")
-    private int commentID;
+    private Integer commentID;
 
     @Column(name = "description")
     private String description;
@@ -28,7 +28,7 @@ public class Comment {
     public Comment() {
     }
 
-    public int getCommentID() {
+    public Integer getCommentID() {
         return commentID;
     }
 

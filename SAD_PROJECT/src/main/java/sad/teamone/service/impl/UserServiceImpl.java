@@ -1,6 +1,7 @@
 package sad.teamone.service.impl;
 
 import sad.teamone.common.annotation.Autowired;
+import sad.teamone.common.annotation.Service;
 import sad.teamone.dao.UserDAO;
 import sad.teamone.entity.User;
 import sad.teamone.service.UserService;
@@ -8,6 +9,7 @@ import sad.teamone.service.UserService;
 /**
  * Created by QuangTV on 10/19/2014.
  */
+@Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -36,5 +38,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User find(int id) {
         return (User) userDAO.find(id);
+    }
+
+    @Override
+    public User checkLogin(String username, String password) {
+        User result = (User)userDAO.login(username, password);
+        return result;
     }
 }

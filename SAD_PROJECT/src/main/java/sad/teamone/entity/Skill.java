@@ -14,7 +14,7 @@ public class Skill {
     @Id
     @GeneratedValue
     @Column(name = "skillID")
-    private int skillID;
+    private Integer skillID;
 
     @Column(name = "skillName")
     private String skillName;
@@ -29,11 +29,11 @@ public class Skill {
         this.skillName = skillName;
     }
 
-    public int getSkillID() {
+    public Integer getSkillID() {
         return skillID;
     }
 
-    public void setSkillID(int skillID) {
+    public void setSkillID(Integer skillID) {
         this.skillID = skillID;
     }
 

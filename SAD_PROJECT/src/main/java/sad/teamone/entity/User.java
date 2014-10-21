@@ -15,7 +15,7 @@ public class User {
     @Id
     @GeneratedValue
     @Column(name = "userID")
-    private int userID;
+    private Integer userID;
     @Column(name = "username", nullable = false, unique = true)
     private String username;
     @Column(name = "password")
@@ -23,18 +23,18 @@ public class User {
     @Column(name = "email")
     private String email;
     @Column(name = "age")
-    private int age;
+    private Integer age;
     @Column(name = "description")
     private String description;
     @Column(name = "avatar")
     private String avatar;
     @Column(name = "sex")
-    private boolean sex;
+    private Boolean sex;
     @Column(name = "address")
     private String address;
 
     @Column(name = "isAdmin")
-    private boolean isAdmin;
+    private Boolean isAdmin;
 
     @Column(name = "create_date")
     private Date create_date;
@@ -61,11 +61,13 @@ public class User {
     public User() {
     }
 
-    public int getUserID() {
+   // Getters and setters
+
+    public Integer getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(Integer userID) {
         this.userID = userID;
     }
 
@@ -93,11 +95,11 @@ public class User {
         this.email = email;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -117,11 +119,11 @@ public class User {
         this.avatar = avatar;
     }
 
-    public boolean isSex() {
+    public Boolean getSex() {
         return sex;
     }
 
-    public void setSex(boolean sex) {
+    public void setSex(Boolean sex) {
         this.sex = sex;
     }
 
@@ -133,20 +135,20 @@ public class User {
         this.address = address;
     }
 
+    public Boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(Boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+
     public Date getCreate_date() {
         return create_date;
     }
 
     public void setCreate_date(Date create_date) {
         this.create_date = create_date;
-    }
-
-    public boolean isAdmin() {
-        return isAdmin;
-    }
-
-    public void setAdmin(boolean isAdmin) {
-        this.isAdmin = isAdmin;
     }
 
     public List<Skill> getSkills() {
@@ -163,5 +165,13 @@ public class User {
 
     public void setJobApplieds(List<JobApplied> jobApplieds) {
         this.jobApplieds = jobApplieds;
+    }
+
+    public List<Notify> getNotifies() {
+        return notifies;
+    }
+
+    public void setNotifies(List<Notify> notifies) {
+        this.notifies = notifies;
     }
 }
