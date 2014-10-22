@@ -60,10 +60,11 @@ public class User {
     // Constructors
     public User() {
     }
-    public  User(String username, String password, String email){
+    public  User(String username, String password, String email, Date create_date){
         this.username=username;
         this.password=password;
         this.email=email;
+        this.create_date=create_date;
     }
    // Getters and setters
 
