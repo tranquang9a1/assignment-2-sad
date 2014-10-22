@@ -1,3 +1,9 @@
+
+<div class="clients">
+    <div class="container">
+        <img src="../img/clients.png" alt="clients" class="img-responsive">
+    </div>
+</div>
 <footer>
     <div class="container">
         <p class="pull-left">About | Terms | Privacy | FAQ | Support | Contact</p>
