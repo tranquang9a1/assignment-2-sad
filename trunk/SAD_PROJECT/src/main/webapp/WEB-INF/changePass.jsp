@@ -38,22 +38,22 @@
         <br>
         <div class="container">
             <div class="content-inner-detail">
-                <form role="form" action="/signUp.do" method="post" enctype="application/x-www-form-urlencoded">
-                    <legend>Sign up</legend>
+                <form role="form" action="/changePass.do" method="post" enctype="application/x-www-form-urlencoded">
+                    <legend style="color: green"><strong>Change password</strong></legend>
                         <c:if test="${requestScope.ERROR}">
-                            <label id="txtError" style="color: red">This Username is already existed!</label>
+                            <label id="txtError" style="color: red">Password is wrong or mismatch!</label>
                         </c:if>
                     <div class="form-group">
-                        <label for="txtUser">Choose a username</label>
-                        <input type="text" value="${requestScope.USER.username}" autofocus="true" maxlength="25" required="true" class="form-control input-lg" id="txtUser" placeholder="Username" name="txtUsername">
+                        <label for="txtCurrentPass">Current password</label>
+                        <input type="password" value="" autofocus="true" maxlength="20" required="true" class="form-control input-lg" id="txtCurrentPass" placeholder="Current password" name="txtCurrentPass">
                     </div>
                     <div class="form-group">
-                        <label for="txtEmail">Email address</label>
-                        <input type="email" value="${requestScope.USER.email}" maxlength="30" required="true" class="form-control input-lg" id="txtEmail" placeholder="Email" name="txtEmail">
+                        <label for="txtNewPass">New password</label>
+                        <input type="password" value="" maxlength="20" required="true" class="form-control input-lg" id="txtNewPass" placeholder="New password" name="txtNewPass">
                     </div>
                     <div class="form-group">
-                        <label for="txtPassword">Password</label>
-                        <input type="password" maxlength="20" required="true" class="form-control input-lg" id="txtPassword" placeholder="Password" name="txtPassword">
+                        <label for="txtConfirmNewPass">Confirm new password</label>
+                        <input type="password" maxlength="20" required="true" class="form-control input-lg" id="txtConfirmNewPass" placeholder="Confirm new password" name="txtConfirmNewPass">
                     </div>
                     <button type="submit" class="btn btn-primary input-lg btn-block">Submit</button>
                 </form>
