@@ -6,9 +6,9 @@ import sad.teamone.entity.Notify;
  * Created by QuangTV on 10/19/2014.
  */
 public interface NotifyService {
-    Notify insert(Notify notify);
-    Notify update(Notify notify);
-    Notify delete(Notify notify);
-    Notify remove(int i);
+    Boolean insert(Notify notify);
+    Boolean update(Notify notify);
+    Boolean delete(Notify notify);
+    Boolean remove(int i);
     Notify find(int id);
 }

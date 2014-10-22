@@ -39,12 +39,12 @@
                 <form role="form" action="/login.do" method="post" enctype="application/x-www-form-urlencoded">
                     <legend>Sign in</legend>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Username</label>
-                        <input type="text" name="username" class="form-control input-lg" id="exampleInputUsername1" placeholder="Username">
+                        <label for="exampleInputUsername1">Username</label>
+                        <input type="text" name="username" maxlength="25" required="true" class="form-control input-lg" id="exampleInputUsername1" placeholder="Username">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
-                        <input type="password" name="password" class="form-control input-lg" id="exampleInputPassword1" placeholder="Password">
+                        <input type="password" name="password" maxlength="20" required="true" class="form-control input-lg" id="exampleInputPassword1" placeholder="Password">
                     </div>
                     <button type="submit" class="btn btn-primary input-lg btn-block">Submit</button>
                 </form>

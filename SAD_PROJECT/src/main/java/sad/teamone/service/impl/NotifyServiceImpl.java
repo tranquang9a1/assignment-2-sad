@@ -14,23 +14,23 @@ public class NotifyServiceImpl implements NotifyService {
     private NotifyDAO notifyDAO;
 
     @Override
-    public Notify insert(Notify notify) {
-        return (Notify)notifyDAO.insert(notify);
+    public Boolean insert(Notify notify) {
+        return notifyDAO.insert(notify);
     }
 
     @Override
-    public Notify update(Notify notify) {
-        return (Notify)notifyDAO.update(notify);
+    public Boolean update(Notify notify) {
+        return notifyDAO.update(notify);
     }
 
     @Override
-    public Notify delete(Notify notify) {
-        return (Notify) notifyDAO.delete(notify);
+    public Boolean delete(Notify notify) {
+        return notifyDAO.delete(notify);
     }
 
     @Override
-    public Notify remove(int id) {
-        return (Notify) notifyDAO.delete(id);
+    public Boolean remove(int id) {
+        return notifyDAO.delete(id);
     }
 
     @Override

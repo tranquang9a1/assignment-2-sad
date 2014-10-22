@@ -14,23 +14,23 @@ public class SkillServiceImpl implements SkillService {
     private SkillDAO skillDAO;
 
     @Override
-    public Skill insert(Skill skill) {
-        return (Skill) skillDAO.insert(skill);
+    public Boolean insert(Skill skill) {
+        return  skillDAO.insert(skill);
     }
 
     @Override
-    public Skill update(Skill skill) {
-        return (Skill)skillDAO.update(skill);
+    public Boolean update(Skill skill) {
+        return skillDAO.update(skill);
     }
 
     @Override
-    public Skill delete(Skill skill) {
-        return (Skill) skillDAO.delete(skill);
+    public Boolean delete(Skill skill) {
+        return  skillDAO.delete(skill);
     }
 
     @Override
-    public Skill remove(int id) {
-        return (Skill) skillDAO.delete(id);
+    public Boolean remove(int id) {
+        return skillDAO.delete(id);
     }
 
     @Override

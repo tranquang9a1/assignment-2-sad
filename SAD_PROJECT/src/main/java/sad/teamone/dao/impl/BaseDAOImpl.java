@@ -26,8 +26,9 @@ public abstract class BaseDAOImpl<T> implements BaseDAO<T> {
 
 
     @Override
-    public T insert(T entity) {
+    public Boolean insert(T entity) {
         EntityManager em = emf.createEntityManager();
+        Boolean result = true;
         try {
             em.getTransaction().begin();
             em.persist(entity);
@@ -36,15 +37,17 @@ public abstract class BaseDAOImpl<T> implements BaseDAO<T> {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
+            result = false;
         } finally {
             em.close();
         }
-        return entity;
+        return result;
     }
 
     @Override
-    public T update(T entity) {
+    public Boolean update(T entity) {
         EntityManager em = emf.createEntityManager();
+        Boolean result = true;
         try {
             em.getTransaction().begin();
             em.merge(entity);
@@ -53,19 +56,43 @@ public abstract class BaseDAOImpl<T> implements BaseDAO<T> {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
+            result = false;
         } finally {
             em.close();
         }
-        return entity;
+        return result;
     }
 
     @Override
-    public T delete(Integer key) {
+    public Boolean delete(Integer key) {
         EntityManager em = emf.createEntityManager();
-        T entity = null;
+        Boolean result = true;
         try {
             em.getTransaction().begin();
-            entity = find(key);
+            T entity = find(key);
+            if (entity != null) {
+                em.remove(entity);
+            } else {
+                result = false;
+            }
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            result = false;
+        } finally {
+            em.close();
+        }
+        return result;
+    }
+
+    @Override
+    public Boolean delete(T entity) {
+        EntityManager em = emf.createEntityManager();
+        Boolean result = true;
+        try {
+            em.getTransaction().begin();
             if (entity != null) {
                 em.remove(entity);
             }
@@ -74,30 +101,12 @@ public abstract class BaseDAOImpl<T> implements BaseDAO<T> {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
-        } finally {
-            em.close();
-        }
-        return entity;
-    }
-
-    @Override
-    public T delete(T entity) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            em.getTransaction().begin();
-            if (entity != null) {
-                em.remove(entity);
-            }
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
+            result = false;
         } finally {
             em.close();
         }
 
-        return entity;
+        return result;
     }
 
     @Override

@@ -8,10 +8,10 @@ import java.util.List;
  * Created by QuangTV on 10/19/2014.
  */
 public interface CommentService {
-    Comment insert(Comment Comment);
-    Comment update(Comment Comment);
-    Comment delete(Comment Comment);
-    Comment remove(int i);
+    Boolean insert(Comment Comment);
+    Boolean update(Comment Comment);
+    Boolean delete(Comment Comment);
+    Boolean remove(int i);
     Comment find(int id);
     List findByJobId(int jobID);
 }

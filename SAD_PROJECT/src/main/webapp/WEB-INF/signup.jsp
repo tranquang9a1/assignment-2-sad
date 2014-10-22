@@ -1,4 +1,4 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,19 +38,22 @@
         <br>
         <div class="container">
             <div class="content-inner-detail">
-                <form role="form">
+                <form role="form" action="/signUp.do" method="post" enctype="application/x-www-form-urlencoded">
                     <legend>Sign up</legend>
+                        <c:if test="${requestScope.ERROR}">
+                            <label for="txtUser" style="color: red">This Username is already exist!</label>
+                        </c:if>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Choose a username</label>
-                        <input type="text" class="form-control input-lg" id="exampleInputUsername1" placeholder="Username">
+                        <label for="txtUser">Choose a username</label>
+                        <input type="text" maxlength="25" required="true" class="form-control input-lg" id="txtUser" placeholder="Username" name="txtUsername">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control input-lg" id="exampleInputEmail1" placeholder="Enter email">
+                        <label for="txtEmail">Email address</label>
+                        <input type="email" maxlength="30" required="true" class="form-control input-lg" id="txtEmail" placeholder="Email" name="txtEmail">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control input-lg" id="exampleInputPassword1" placeholder="Password">
+                        <label for="txtPassword">Password</label>
+                        <input type="password" maxlength="20" required="true" class="form-control input-lg" id="txtPassword" placeholder="Password" name="txtPassword">
                     </div>
                     <div class="checkbox">
                         <label>

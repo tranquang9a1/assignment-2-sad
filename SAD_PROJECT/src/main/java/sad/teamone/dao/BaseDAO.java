@@ -6,13 +6,13 @@ import java.util.List;
  * Created by QuangTV on 10/19/2014.
  */
 public interface BaseDAO<T> {
-    T insert(T entity);
+    Boolean insert(T entity);
 
-    T update(T entity);
+    Boolean update(T entity);
 
-    T delete(Integer key);
+    Boolean delete(Integer key);
 
-    T delete(T entity);
+    Boolean delete(T entity);
 
     T find(int key );
 

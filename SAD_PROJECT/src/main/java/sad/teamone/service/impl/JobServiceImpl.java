@@ -16,23 +16,23 @@ public class JobServiceImpl implements JobService {
     private JobDAO jobDAO;
 
     @Override
-    public Job insert(Job job) {
-        return (Job)jobDAO.insert(job);
+    public Boolean insert(Job job) {
+        return jobDAO.insert(job);
     }
 
     @Override
-    public Job update(Job job) {
-        return (Job)jobDAO.update(job);
+    public Boolean update(Job job) {
+        return jobDAO.update(job);
     }
 
     @Override
-    public Job delete(Job job) {
-        return (Job) jobDAO.delete(job);
+    public Boolean delete(Job job) {
+        return jobDAO.delete(job);
     }
 
     @Override
-    public Job remove(int id) {
-        return (Job) jobDAO.delete(id);
+    public Boolean remove(int id) {
+        return jobDAO.delete(id);
     }
 
     @Override
