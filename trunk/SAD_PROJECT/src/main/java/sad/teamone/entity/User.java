@@ -60,7 +60,11 @@ public class User {
     // Constructors
     public User() {
     }
-
+    public  User(String username, String password, String email){
+        this.username=username;
+        this.password=password;
+        this.email=email;
+    }
    // Getters and setters
 
     public Integer getUserID() {

@@ -60,4 +60,24 @@ public class UserController {
         }
         return "index.jsp";
     }
+
+    @RequestMapping(url = "/signUp.do", method = RequestMethod.POST)
+    public String signUp(HttpServletRequest request, HttpServletResponse response) {
+        String username = request.getParameter("txtUsername");
+        String password = request.getParameter("txtPassword");
+        String email = request.getParameter("txtEmail");
+        User user = new User(username,password,email);
+        Boolean result = userService.insert(user);
+
+        // signUp fail
+        if (!result) {
+            request.setAttribute("ERROR", true);
+            return "WEB-INF/signup.jsp";
+        }
+
+        // Create new session
+        HttpSession session = request.getSession();
+        session.setAttribute("user", user);
+        return "index.jsp";
+    }
 }

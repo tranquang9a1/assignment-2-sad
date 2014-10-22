@@ -16,23 +16,23 @@ public class UserServiceImpl implements UserService {
     private UserDAO userDAO;
 
     @Override
-    public User insert(User user) {
-        return (User) userDAO.insert(user);
+    public Boolean insert(User user) {
+        return  userDAO.insert(user);
     }
 
     @Override
-    public User update(User user) {
-        return (User) userDAO.update(user);
+    public Boolean update(User user) {
+        return  userDAO.update(user);
     }
 
     @Override
-    public User delete(User user) {
-        return (User) userDAO.delete(user);
+    public Boolean delete(User user) {
+        return  userDAO.delete(user);
     }
 
     @Override
-    public User remove(int id) {
-        return (User) userDAO.delete(id);
+    public Boolean remove(int id) {
+        return  userDAO.delete(id);
     }
 
     @Override

@@ -6,9 +6,9 @@ import sad.teamone.entity.Skill;
  * Created by QuangTV on 10/19/2014.
  */
 public interface SkillService {
-    Skill insert(Skill skill);
-    Skill update(Skill skill);
-    Skill delete(Skill skill);
-    Skill remove(int i);
+    Boolean insert(Skill skill);
+    Boolean update(Skill skill);
+    Boolean delete(Skill skill);
+    Boolean remove(int i);
     Skill find(int id);
 }

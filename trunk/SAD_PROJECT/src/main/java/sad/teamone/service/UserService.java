@@ -6,10 +6,10 @@ import sad.teamone.entity.User;
  * Created by QuangTV on 10/19/2014.
  */
 public interface UserService {
-    User insert(User user);
-    User update(User user);
-    User delete(User user);
-    User remove(int i);
+    Boolean insert(User user);
+    Boolean update(User user);
+    Boolean delete(User user);
+    Boolean remove(int i);
     User find(int id);
 
     User checkLogin(String username, String password);

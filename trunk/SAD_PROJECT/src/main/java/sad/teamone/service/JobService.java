@@ -9,10 +9,10 @@ import java.util.List;
  */
 public interface JobService {
 
-    Job insert(Job job);
-    Job update(Job job);
-    Job delete(Job job);
-    Job remove(int id);
+    Boolean insert(Job job);
+    Boolean update(Job job);
+    Boolean delete(Job job);
+    Boolean remove(int id);
     Job find(int id);
     List findAll();
     List findByName(String jobName);

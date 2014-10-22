@@ -16,26 +16,26 @@ public class CommentServiceImpl implements CommentService {
 
 
     @Override
-    public Comment insert(Comment comment) {
-        return (Comment) commentDAO.insert(comment);
+    public Boolean insert(Comment comment) {
+        return commentDAO.insert(comment);
     }
 
 
     @Override
-    public Comment update(Comment comment) {
-        return (Comment) commentDAO.update(comment);
+    public Boolean update(Comment comment) {
+        return commentDAO.update(comment);
     }
 
 
     @Override
-    public Comment delete(Comment comment) {
-        return (Comment) commentDAO.delete(comment);
+    public Boolean delete(Comment comment) {
+        return commentDAO.delete(comment);
     }
 
 
     @Override
-    public Comment remove(int id) {
-        return (Comment) commentDAO.delete(id);
+    public Boolean remove(int id) {
+        return  commentDAO.delete(id);
     }
 
     @Override

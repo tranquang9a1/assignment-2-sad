@@ -7,9 +7,9 @@ import sad.teamone.entity.Category;
  */
 public interface CategoryService {
 
-    Category insert(Category category);
-    Category update(Category category);
-    Category delete(Category category);
-    Category remove(int i);
+    Boolean insert(Category category);
+    Boolean update(Category category);
+    Boolean delete(Category category);
+    Boolean remove(int i);
     Category find(int id);
 }

@@ -13,26 +13,26 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryDAO categoryDAO;
 
     @Override
-    public Category insert(Category category) {
-        return (Category) categoryDAO.insert(category);
+    public Boolean insert(Category category) {
+        return categoryDAO.insert(category);
     }
 
 
     @Override
-    public Category update(Category category) {
-        return (Category) categoryDAO.update(category);
+    public Boolean update(Category category) {
+        return categoryDAO.update(category);
     }
 
 
     @Override
-    public Category delete(Category category) {
-        return (Category) categoryDAO.delete(category);
+    public Boolean delete(Category category) {
+        return categoryDAO.delete(category);
     }
 
 
     @Override
-    public Category remove(int id) {
-        return (Category) categoryDAO.delete(id);
+    public Boolean remove(int id) {
+        return categoryDAO.delete(id);
     }
 
     @Override
