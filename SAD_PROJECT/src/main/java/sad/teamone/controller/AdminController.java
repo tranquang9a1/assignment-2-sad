@@ -13,9 +13,12 @@ import sad.teamone.service.JobService;
 import sad.teamone.service.UserService;
 
 import javax.annotation.RegEx;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -42,6 +45,12 @@ public class AdminController {
         if (user == null || !user.getIsAdmin()) {
             return "WEB-INF/admin/login.jsp";
         }
+        List<Job> listJob = jobService.findToday();
+        List<User> listUser = userService.findToday();
+        List<Comment> listComment = commentService.findToday();
+        session.setAttribute("countJob", listJob.size());
+        session.setAttribute("countUser", listUser.size());
+        session.setAttribute("countComment", listComment.size());
         return "WEB-INF/admin/index.jsp";
     }
 
@@ -90,12 +99,87 @@ public class AdminController {
 
     @RequestMapping(url = "/adminuser.do")
     public String user(HttpServletRequest request, HttpServletResponse response) {
+        List listUser = userService.findToday();
+        HttpSession session = request.getSession();
+        session.setAttribute("User", listUser);
         return "WEB-INF/admin/user.jsp";
     }
 
     @RequestMapping(url = "/adminjob.do")
     public String job(HttpServletRequest request, HttpServletResponse response) {
+        List<Job> listJob= jobService.findToday();
+        HttpSession session = request.getSession(true);
+        session.setAttribute("Job", listJob);
+
         return "WEB-INF/admin/job.jsp";
     }
+
+    @RequestMapping(url = "/approve.do")
+    public String approveJob(HttpServletRequest request, HttpServletResponse response) {
+
+        HttpSession session = request.getSession();
+        Integer index = Integer.valueOf(request.getParameter("index"));
+
+        List<Job> listJob = (List<Job>) session.getAttribute("Job");
+        listJob.get(index).setStatus(true);
+
+        session.setAttribute("Job", listJob);
+
+        return "job.jsp";
+
+    }
+
+    @RequestMapping(url = "/listAllUser.do")
+    public String showAllUser(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        List listAllUser = userService.findAll();
+        session.setAttribute("User", listAllUser);
+        return "WEB-INF/admin/user.jsp";
+    }
+
+    @RequestMapping(url="/deleteUser.do")
+    public void deleteUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        String userID = request.getParameter("userID");
+        int id = Integer.parseInt(userID);
+        User user = userService.find(id);
+        Boolean result = userService.remove(id);
+        if(result)
+        {
+            response.sendRedirect("adminuser.do");
+        }
+    }
+
+    @RequestMapping(url = "/listAllJob.do")
+    public String showAllJob(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        List listAllJob = jobService.findAll();
+        session.setAttribute("Job", listAllJob);
+        return "WEB-INF/admin/job.jsp";
+    }
+
+    @RequestMapping(url="/deleteJob.do")
+    public void deleteJob(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        String jobID = request.getParameter("jobID");
+        int id = Integer.parseInt(jobID);
+        Job job = jobService.find(id);
+        Boolean result = jobService.remove(id);
+        if(result)
+        {
+            response.sendRedirect("adminjob.do");
+        }
+    }
+
+    @RequestMapping(url="/changeStatus.do")
+    public void changeStatus(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String jobID = request.getParameter("jobID");
+        int id = Integer.parseInt(jobID);
+        Job job = jobService.find(id);
+        job.setStatus(true);
+        boolean result = jobService.update(job);
+        response.sendRedirect("adminjob.do");
+    }
+
 
 }

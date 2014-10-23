@@ -9,4 +9,5 @@ public interface UserDAO<User> extends BaseDAO<User> {
 
     User login(String username, String password);
     List findToday();
+    List<User> findAll();
 }

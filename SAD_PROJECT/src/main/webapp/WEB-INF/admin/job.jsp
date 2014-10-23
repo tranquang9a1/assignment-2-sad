@@ -25,6 +25,7 @@
 
                 <!-- /.panel-heading -->
                 <div class="panel-body">
+                    <a href="listAllJob.do">Show all</a>
                     <div class="table-responsive">
                         <table class="table table-hover" id="dataTables-example">
                             <thead>
@@ -32,7 +33,7 @@
                                 <th>ID</th>
                                 <th>Job Name</th>
                                 <th>Job Description</th>
-                                <th>Publisher</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -41,11 +42,22 @@
                                 <tr class="even gradeC">
                                     <td>${job.jobID}</td>
                                     <td>${job.jobName}</td>
-                                    <td>${job.jobDescription}</td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${job.status}">
+                                                da
+                                            </c:when>
+                                            <c:otherwise>
+                                                Chua
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
                                     <td class="center">${job.userID}</td>
                                     <td class="center">
-                                        <a href="#" ><i class="glyphicon glyphicon-ok-sign" style="float: left; margin-left: 10px; cursor: pointer;" title="Approve"></i></a>
-                                        <a href="#" ><i class="glyphicon glyphicon-trash" style="float: left; margin-left: 20px; cursor: pointer;" title="Delete"></i></a>
+                                        <c:if test="${job.status == false}">
+                                            <a href="changeStatus.do?jobID=${job.jobID}" ><i class="glyphicon glyphicon-ok-sign" style="float: left; margin-left: 10px; cursor: pointer;" title="Approve"></i></a>
+                                        </c:if>
+                                        <a href="deleteJob.do?jobID=${job.jobID}" ><i class="glyphicon glyphicon-trash" style="float: left; margin-left: 20px; cursor: pointer;" title="Delete"></i></a>
                                     </td>
                                 </tr>
 
