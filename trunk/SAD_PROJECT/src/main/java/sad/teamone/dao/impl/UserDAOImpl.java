@@ -8,6 +8,7 @@ import sad.teamone.entity.User;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import java.util.List;
 
 /**
  * Created by QuangTV on 10/19/2014.
@@ -25,6 +26,19 @@ public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO<User> {
             return user;
         }catch (NoResultException ex) {
             log.info(ex.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public List findToday() {
+        try {
+            EntityManager em = emf.createEntityManager();
+            Query query = em.createQuery("SELECT a FROM User a WHERE a.create_date = current_date ");
+            return query.getResultList();
+
+        }catch (NoResultException ex){
+            ex.printStackTrace();
             return null;
         }
     }

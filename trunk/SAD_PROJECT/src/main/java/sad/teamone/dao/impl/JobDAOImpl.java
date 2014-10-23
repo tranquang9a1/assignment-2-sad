@@ -5,6 +5,7 @@ import sad.teamone.entity.Job;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,6 +40,12 @@ public class JobDAOImpl extends BaseDAOImpl<Job> implements JobDAO<Job> {
     public List findUserId(int userID) {
         Query query = em.createQuery("Select e From Job e where e.userID =:userID");
         query.setParameter("userID", userID);
+        return query.getResultList();
+    }
+
+    @Override
+    public List findToday() {
+        Query query = em.createQuery("Select e From Job e where e.create_date = current_date ");
         return query.getResultList();
     }
 

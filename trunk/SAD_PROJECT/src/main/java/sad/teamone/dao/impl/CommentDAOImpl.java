@@ -20,4 +20,11 @@ public class CommentDAOImpl extends BaseDAOImpl<Comment> implements CommentDAO<C
         query.setParameter("jobID", jobID);
         return query.getResultList();
     }
+
+    @Override
+    public List findToday() {
+        Query query = em.createQuery("Select e From Comment e where e.create_date = current_date ");
+
+        return query.getResultList();
+    }
 }

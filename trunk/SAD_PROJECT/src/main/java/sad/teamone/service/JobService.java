@@ -19,4 +19,5 @@ public interface JobService {
     List findBySalary(int min, int max);
     List findByStatus(Boolean status);
     List findUserId(int userID);
+    List findToday();
 }
