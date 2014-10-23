@@ -12,6 +12,7 @@ import sad.teamone.entity.Job;
 import sad.teamone.entity.Skill;
 import sad.teamone.entity.User;
 import sad.teamone.service.CategoryService;
+import sad.teamone.service.CommentService;
 import sad.teamone.service.JobService;
 
 import javax.servlet.ServletException;
@@ -34,6 +35,9 @@ public class JobController {
 
     @Autowired(id = "categoryService")
     private CategoryService categoryService;
+
+    @Autowired(id = "commentService")
+    private CommentService commentService;
 
     private Logger log = LoggerFactory.getLogger(UserController.class);
 
@@ -87,13 +91,6 @@ public class JobController {
         session.setAttribute("user", user);
         List listJob = jobService.findAll();
         request.setAttribute("LIST_JOB", listJob);
-        return "index.jsp";
-    }
-
-    @RequestMapping(url = "/findAllJob.do")
-    public String findAllJob(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        List listJob = jobService.findAll();
-        request.setAttribute("LIST_JOB",listJob);
         return "index.jsp";
     }
 
@@ -197,13 +194,17 @@ public class JobController {
         Job job = jobService.find(Integer.parseInt(id));
         HttpSession session = request.getSession();
         session.setAttribute("SINGLEJOB", job);
+        session.setAttribute("LISTCOMMENT", job.getComments());
 
-        if (session.getAttribute("user") == null) {
+
+        if(session.getAttribute("user") == null) {
             session.setAttribute("currentURL", "WEB-INF/job.jsp");
             return "WEB-INF/signin.jsp";
         }
         return "WEB-INF/job.jsp";
     }
+
+
 
     @RequestMapping(url = "/findLimitJobs.do")
     @ResponeBody
