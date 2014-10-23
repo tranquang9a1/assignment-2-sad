@@ -42,7 +42,7 @@
         <!-- post or upload cv -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <div class="navbar-left">
-                <a href="/jobs.do" class="btn btn-default navbar-btn">Browse all jobs &raquo;</a>
+                <a href="/findAllJob.do" class="btn btn-default navbar-btn">Browse all jobs &raquo;</a>
                 <a href="/addJob.do" class="btn btn-warning navbar-btn">Post a job &raquo;</a>
             </div>
             <!-- the menu -->
