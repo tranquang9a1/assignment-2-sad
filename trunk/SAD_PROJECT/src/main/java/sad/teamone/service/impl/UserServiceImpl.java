@@ -52,4 +52,14 @@ public class UserServiceImpl implements UserService {
     public List findToday() {
         return userDAO.findToday();
     }
+
+    @Override
+    public List findAll() {
+        return userDAO.findAll();
+    }
+
+    @Override
+    public Boolean deleteByID(Integer id) {
+        return  userDAO.delete(id);
+    }
 }

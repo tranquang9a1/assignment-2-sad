@@ -16,4 +16,6 @@ public interface UserService {
 
     User checkLogin(String username, String password);
     List findToday();
+    List findAll();
+    Boolean deleteByID(Integer id);
 }

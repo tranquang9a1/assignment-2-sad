@@ -69,12 +69,13 @@ public abstract class BaseDAOImpl<T> implements BaseDAO<T> {
         Boolean result = true;
         try {
             em.getTransaction().begin();
-            T entity = find(key);
+            T entity = em.find(entityClass,key);
             if (entity != null) {
                 em.remove(entity);
             } else {
                 result = false;
             }
+            em.flush();
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (em.getTransaction().isActive()) {
