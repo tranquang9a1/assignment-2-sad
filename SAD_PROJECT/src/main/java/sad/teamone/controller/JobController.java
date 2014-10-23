@@ -90,6 +90,13 @@ public class JobController {
         return "index.jsp";
     }
 
+    @RequestMapping(url = "/findAllJob.do")
+    public String findAllJob(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        List listJob = jobService.findAll();
+        request.setAttribute("LIST_JOB",listJob);
+        return "index.jsp";
+    }
+
     @RequestMapping(url = "/advanceSearchJob.do", method = RequestMethod.POST)
     public String searchJob(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String categoryID = request.getParameter("cbbCategory");
@@ -191,7 +198,7 @@ public class JobController {
         HttpSession session = request.getSession();
         session.setAttribute("SINGLEJOB", job);
 
-        if(session.getAttribute("user") == null) {
+        if (session.getAttribute("user") == null) {
             session.setAttribute("currentURL", "WEB-INF/job.jsp");
             return "WEB-INF/signin.jsp";
         }
