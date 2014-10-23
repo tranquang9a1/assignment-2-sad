@@ -25,6 +25,7 @@ public class Comment {
     @JoinColumn(name = "userID",nullable = false)
     private User user;
 
+
     public Comment() {
     }
 
@@ -59,4 +60,5 @@ public class Comment {
     public void setUser(User user) {
         this.user = user;
     }
+
 }

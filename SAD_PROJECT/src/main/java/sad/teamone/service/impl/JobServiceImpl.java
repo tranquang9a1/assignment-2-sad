@@ -64,4 +64,9 @@ public class JobServiceImpl implements JobService {
     public List findUserId(int userID) {
         return jobDAO.findUserId(userID);
     }
+
+    @Override
+    public List findToday() {
+        return jobDAO.findToday();
+    }
 }

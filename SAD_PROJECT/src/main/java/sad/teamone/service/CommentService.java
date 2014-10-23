@@ -14,4 +14,5 @@ public interface CommentService {
     Boolean remove(int i);
     Comment find(int id);
     List findByJobId(int jobID);
+    List findToday();
 }

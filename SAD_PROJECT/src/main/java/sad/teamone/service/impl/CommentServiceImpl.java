@@ -47,4 +47,9 @@ public class CommentServiceImpl implements CommentService {
     public List findByJobId(int jobID){
         return commentDAO.findByJobId(jobID);
     }
+
+    @Override
+    public List findToday() {
+        return commentDAO.findToday();
+    }
 }

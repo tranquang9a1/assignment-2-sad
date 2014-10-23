@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface CommentDAO<Comment> extends BaseDAO<Comment> {
     List findByJobId(int jobID);
+    List findToday();
 }
