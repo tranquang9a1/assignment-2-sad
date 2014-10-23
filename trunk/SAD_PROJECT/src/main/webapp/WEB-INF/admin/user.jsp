@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: QuangTV
@@ -26,29 +27,64 @@
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <a href="listAllUser.do">Show all</a>
+                <a href="adminuser.do">Today</a>
+
                 <div class="table-responsive">
                     <table class="table table-hover" id="dataTables-example">
                         <thead>
                         <tr>
-                            <th>name</th>
-                            <!--<th>Job Name</th>
-                            <th>Job Description</th>
-                            <th>Publisher</th>-->
+                            <th>User ID</th>
+                            <th>User Name</th>
+                            <th>Age</th>
+                            <th>Sex</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Avatar</th>
+                            <th>Description</th>
+                            <th>Create Date</th>
+                            <th>Admin</th>
+                            <th>Password</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
                             <c:forEach items="${sessionScope.User}" var="user" varStatus="item" >
                                 <tr class="even gradeC">
+                                    <td>${user.userID}</td>
                                     <td>${user.username}</td>
-                                    <!--<td>${job.jobName}</td>
-                                    <td>${job.jobDescription}</td>
-                                    <td class="center">${job.userID}</td>-->
+                                    <td>${user.age}</td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${user.sex == true}">
+                                                Nam
+                                            </c:when>
+                                            <c:otherwise>
+                                                Nu
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                    <td>${user.email}</td>
+                                    <td>${user.address}</td>
+                                    <td>${user.avatar}</td>
+                                    <td>${user.description}</td>
+                                    <td>
+                                        <fmt:formatDate type="date" value="${user.create_date}" />
+                                    </td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${user.isAdmin == true}">
+                                                Admin
+                                            </c:when>
+                                            <c:otherwise>
+                                                User
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                    <td>${user.password}</td>
                                     <td class="center">
                                         <c:if test="${user.isAdmin == false}">
-
-                                            <a href="deleteUser.do?userID=${user.userID}" ><i class="glyphicon glyphicon-trash" style="float: left; margin-left: 20px; cursor: pointer;" title="Delete"></i></a>
-
+                                            <a href="changeRole.do?userID=${user.userID}">Set Admin</a>
+                                            <a href="deleteUser.do?userID=${user.userID}"><i class="glyphicon glyphicon-trash" style="float: left; margin-left: 20px; cursor: pointer;" title="Delete"></i></a>
                                         </c:if>
                                     </td>
                                 </tr>

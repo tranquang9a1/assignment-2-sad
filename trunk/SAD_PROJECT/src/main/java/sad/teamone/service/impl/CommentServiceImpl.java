@@ -52,4 +52,9 @@ public class CommentServiceImpl implements CommentService {
     public List findToday() {
         return commentDAO.findToday();
     }
+
+    @Override
+    public List findAll() {
+        return commentDAO.findAll();
+    }
 }

@@ -15,4 +15,5 @@ public interface CommentService {
     Comment find(int id);
     List findByJobId(int jobID);
     List findToday();
+    List findAll();
 }

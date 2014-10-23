@@ -36,6 +36,7 @@ public class AdminController {
     @Autowired
     private CommentService commentService;
 
+    private Boolean showAll = false;
     @RequestMapping(url = "/admincp.do")
     public String admin(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
@@ -80,8 +81,6 @@ public class AdminController {
         session.setAttribute("User", listUser);
         session.setAttribute("Comment", listComment);
 
-
-
         return "WEB-INF/admin/index.jsp";
     }
 
@@ -94,6 +93,9 @@ public class AdminController {
 
     @RequestMapping(url = "/admincomment.do")
     public String comment(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        List listComment = commentService.findToday();
+        session.setAttribute("Comment", listComment);
         return "WEB-INF/admin/comment.jsp";
     }
 
@@ -108,9 +110,8 @@ public class AdminController {
     @RequestMapping(url = "/adminjob.do")
     public String job(HttpServletRequest request, HttpServletResponse response) {
         List<Job> listJob= jobService.findToday();
-        HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession();
         session.setAttribute("Job", listJob);
-
         return "WEB-INF/admin/job.jsp";
     }
 
@@ -130,11 +131,21 @@ public class AdminController {
     }
 
     @RequestMapping(url = "/listAllUser.do")
-    public String showAllUser(HttpServletRequest request, HttpServletResponse response) {
+    public String showAllUser(HttpServletRequest request, HttpServletResponse response)  {
         HttpSession session = request.getSession();
         List listAllUser = userService.findAll();
         session.setAttribute("User", listAllUser);
+        showAll = true;
         return "WEB-INF/admin/user.jsp";
+
+    }
+
+    @RequestMapping(url="/listAllComment.do")
+    public String showAllComment(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
+        List listComment = commentService.findAll();
+        session.setAttribute("Comment",listComment);
+        return "WEB-INF/admin/comment.jsp";
     }
 
     @RequestMapping(url="/deleteUser.do")
@@ -144,9 +155,8 @@ public class AdminController {
         int id = Integer.parseInt(userID);
         User user = userService.find(id);
         Boolean result = userService.remove(id);
-        if(result)
-        {
-            response.sendRedirect("adminuser.do");
+        if(result) {
+           response.sendRedirect("adminuser.do");
         }
     }
 
@@ -160,7 +170,6 @@ public class AdminController {
 
     @RequestMapping(url="/deleteJob.do")
     public void deleteJob(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
         String jobID = request.getParameter("jobID");
         int id = Integer.parseInt(jobID);
         Job job = jobService.find(id);
@@ -171,15 +180,35 @@ public class AdminController {
         }
     }
 
+    @RequestMapping(url="/deleteComment.do")
+    public void deleteComment(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String commentID=request.getParameter("commentID");
+        int id = Integer.parseInt(commentID);
+        Comment comment = commentService.find(id);
+        Boolean result = commentService.remove(id);
+        if(result){
+            response.sendRedirect("admincomment.do");
+        }
+    }
+
     @RequestMapping(url="/changeStatus.do")
     public void changeStatus(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String jobID = request.getParameter("jobID");
         int id = Integer.parseInt(jobID);
         Job job = jobService.find(id);
         job.setStatus(true);
-        boolean result = jobService.update(job);
+        jobService.update(job);
         response.sendRedirect("adminjob.do");
     }
 
+    @RequestMapping(url="/changeRole.do")
+    public void changeRole(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String userID = request.getParameter("userID");
+        int id = Integer.parseInt(userID);
+        User user = userService.find(id);
+        user.setIsAdmin(true);
+        userService.update(user);
+        response.sendRedirect("adminuser.do");
+    }
 
 }
