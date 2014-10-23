@@ -36,7 +36,7 @@
                 <span class="icon-bar"></span>
             </button>
             <!-- Be sure to leave the brand out there if you want it shown -->
-            <a class="navbar-brand" href="../index.jsp">Job Portal</a>
+            <a class="navbar-brand" href="/index.do">Job Portal</a>
         </div>
 
         <!-- post or upload cv -->

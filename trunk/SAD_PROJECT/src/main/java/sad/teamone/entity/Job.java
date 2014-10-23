@@ -41,6 +41,9 @@ public class Job {
     @Column(name = "userID")
     private Integer userID;
 
+    @Column(name = "username")
+    private String username;
+
     @Column(name = "deadline")
     private Date deadline;
 
@@ -68,7 +71,7 @@ public class Job {
     public Job() {
     }
 
-    public Job(String jobName, String jobDescription, String jobRequirement, String address, Integer salary, Integer numberUser, Date deadline, Date create_date, Integer userID, List<Category> categories, Boolean status) {
+    public Job(String jobName, String jobDescription, String jobRequirement, String address, Integer salary, Integer numberUser, Date deadline, Date create_date, Integer userID, String username, List<Category> categories, Boolean status) {
         this.jobName = jobName;
         this.jobDescription = jobDescription;
         this.jobRequirement = jobRequirement;
@@ -78,6 +81,7 @@ public class Job {
         this.deadline = deadline;
         this.create_date = create_date;
         this.userID = userID;
+        this.username = username;
         this.categories = categories;
         this.status = status;
     }
@@ -154,6 +158,15 @@ public class Job {
     public void setUserID(Integer userID) {
         this.userID = userID;
     }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
 
     public Date getDeadline() {
         return deadline;

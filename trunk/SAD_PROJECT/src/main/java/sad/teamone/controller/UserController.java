@@ -6,8 +6,10 @@ import sad.teamone.common.annotation.Autowired;
 import sad.teamone.common.annotation.Controller;
 import sad.teamone.common.annotation.RequestMapping;
 import sad.teamone.common.constant.RequestMethod;
+import sad.teamone.entity.Job;
 import sad.teamone.entity.Skill;
 import sad.teamone.entity.User;
+import sad.teamone.service.JobService;
 import sad.teamone.service.SkillService;
 import sad.teamone.service.UserService;
 
@@ -35,6 +37,9 @@ public class UserController {
     @Autowired(id = "skillService")
     private SkillService skillService;
 
+    @Autowired(id = "jobService")
+    private JobService jobService;
+
     private Logger log = LoggerFactory.getLogger(UserController.class);
 
     @RequestMapping(url = "/signin.do")
@@ -57,6 +62,13 @@ public class UserController {
         return "WEB-INF/changePass.jsp";
     }
 
+    @RequestMapping(url = "/index.do")
+    public String indexPage(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        List listJob = jobService.findAll();
+        request.setAttribute("LIST_JOB",listJob);
+        return "index.jsp";
+    }
+
     @RequestMapping(url = "/login.do", method = RequestMethod.POST)
     public String login(HttpServletRequest request, HttpServletResponse response) {
         String username = request.getParameter("username");
@@ -71,6 +83,9 @@ public class UserController {
         // Create new session
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
+
+        List listJob = jobService.findAll();
+        request.setAttribute("LIST_JOB",listJob);
         if(session.getAttribute("currentURL") != null) {
             return (String)session.getAttribute("currentURL");
         }
@@ -83,6 +98,8 @@ public class UserController {
         if (session != null) {
             session.invalidate();
         }
+        List listJob = jobService.findAll();
+        request.setAttribute("LIST_JOB",listJob);
         return "index.jsp";
     }
 
@@ -106,6 +123,9 @@ public class UserController {
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
         log.info("Insert new user: " + user);
+
+        List listJob = jobService.findAll();
+        request.setAttribute("LIST_JOB",listJob);
         return "index.jsp";
     }
 

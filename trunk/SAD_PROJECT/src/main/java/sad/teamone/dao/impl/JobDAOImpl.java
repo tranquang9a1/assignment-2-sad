@@ -44,6 +44,55 @@ public class JobDAOImpl extends BaseDAOImpl<Job> implements JobDAO<Job> {
     }
 
     @Override
+    public List findByLocation(String address) {
+        Query query = em.createQuery("Select e From Job e where e.address =:address");
+        query.setParameter("address", address);
+        return query.getResultList();
+    }
+
+    @Override
+    public List findByCategory(int categoryID) {
+        Query query = em.createQuery("Select e From Job e where (:categoryID member of e.categories)");
+        query.setParameter("categoryID", categoryID);
+        return query.getResultList();
+    }
+
+    @Override
+    public List findByCategoryAndLocation(int categoryID, String address){
+        Query query = em.createQuery("Select e From Job e where (:categoryID member of e.categories) and e.address=:address");
+        query.setParameter("categoryID", categoryID);
+        query.setParameter("address",address);
+        return query.getResultList();
+    }
+
+    @Override
+    public List findByCategoryAndSalary(int categoryID, int minSalary, int maxSalary){
+        Query query = em.createQuery("Select e From Job e where (:categoryID member of e.categories) and (e.salary >=:minSalary and e.salary <=:maxSalary)");
+        query.setParameter("categoryID", categoryID);
+        query.setParameter("minSalary",minSalary);
+        query.setParameter("maxSalary",maxSalary);
+        return query.getResultList();
+    }
+
+    @Override
+    public List findByLocationAndSalary(String address, int minSalary, int maxSalary){
+        Query query = em.createQuery("Select e From Job e where e.address =:address and (e.salary >=:minSalary and e.salary <=:maxSalary)");
+        query.setParameter("address",address);
+        query.setParameter("minSalary",minSalary);
+        query.setParameter("maxSalary",maxSalary);
+        return query.getResultList();
+    }
+
+    @Override
+    public List findByCategoryAndLocationAndSalary(int categoryID, String address, int minSalary, int maxSalary){
+        Query query = em.createQuery("Select e From Job e where (:categoryID member of e.categories) and e.address =:address and (e.salary >=:minSalary and e.salary <=:maxSalary)");
+        query.setParameter("categoryID",categoryID);
+        query.setParameter("address",address);
+        query.setParameter("minSalary",minSalary);
+        query.setParameter("maxSalary",maxSalary);
+        return query.getResultList();
+    }
+    @Override
     public List findToday() {
         Query query = em.createQuery("Select e From Job e where e.status = false ");
         return query.getResultList();
