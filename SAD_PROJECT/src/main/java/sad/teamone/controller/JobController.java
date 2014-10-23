@@ -76,7 +76,7 @@ public class JobController {
         } catch (Exception e) {
             log.info(e.getMessage());
         }
-        Job job = new Job(jobTitle, description, requirement, location, tmpSalary, tmpNum, tmpDeadline, new Date(), user.getUserID(), listCategory, false);
+        Job job = new Job(jobTitle, description, requirement, location, tmpSalary, tmpNum, tmpDeadline, new Date(), user.getUserID(), user.getUsername(), listCategory, false);
 
         Boolean result = jobService.insert(job);
         jobService.update(job);
@@ -85,6 +85,63 @@ public class JobController {
             log.info("Job " + job + "is posted successfully");
         }
         session.setAttribute("user", user);
+        List listJob = jobService.findAll();
+        request.setAttribute("LIST_JOB", listJob);
+        return "index.jsp";
+    }
+
+    @RequestMapping(url = "/advanceSearchJob.do", method = RequestMethod.POST)
+    public String searchJob(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String categoryID = request.getParameter("cbbCategory");
+        String location = request.getParameter("cbbLocation");
+        String salary = request.getParameter("cbbSalary");
+        int min = 0, max = 0;
+        List listJob = new ArrayList();
+
+
+        if (!salary.equals("")) {
+            try {
+                switch (Integer.parseInt(salary)) {
+                    case 1: {
+                        min = 500;
+                        max = 2000;
+                        break;
+                    }
+                    case 2: {
+                        min = 2000;
+                        max = 5000;
+                        break;
+                    }
+                    case 3: {
+                        min = 5000;
+                        max = 9999999;
+                        break;
+                    }
+                }
+            } catch (Exception e) {
+                log.info(e.getMessage());
+            }
+            if (categoryID.equals("") && location.equals("")) {
+                listJob = jobService.findBySalary(min, max);
+            } else if (categoryID.equals("") && !location.equals("")) {
+                listJob = jobService.findByLocationAndSalary(location, min, max);
+            } else if (!categoryID.equals("") && location.equals("")) {
+                listJob = jobService.findByCategoryAndSalary(Integer.parseInt(categoryID), min, max);
+            } else if (!categoryID.equals("") && !location.equals("")) {
+                listJob = jobService.findByCategoryAndLocationAndSalary(Integer.parseInt(categoryID), location, min, max);
+            }
+        } else {
+            if (categoryID.equals("") && location.equals("")) {
+                listJob = jobService.findAll();
+            } else if (categoryID.equals("") && !location.equals("")) {
+                listJob = jobService.findByLocation(location);
+            } else if ((!categoryID.equals("") && location.equals(""))) {
+                listJob = jobService.findByCategory(Integer.parseInt(categoryID));
+            } else {
+                listJob = jobService.findByCategoryAndLocation(Integer.parseInt(categoryID), location);
+            }
+        }
+        request.setAttribute("LIST_JOB", listJob);
         return "index.jsp";
     }
 

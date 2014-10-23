@@ -19,6 +19,12 @@ public interface JobService {
     List findBySalary(int min, int max);
     List findByStatus(Boolean status);
     List findUserId(int userID);
+    List findByLocation(String address);
+    List findByCategory(int categoryID);
+    List findByCategoryAndLocation(int categoryID, String address);
+    List findByCategoryAndSalary(int categoryID, int min, int max);
+    List findByLocationAndSalary(String address, int min, int max);
+    List findByCategoryAndLocationAndSalary(int categoryID, String address, int min, int max);
     List findToday();
     List findLimit();
 }

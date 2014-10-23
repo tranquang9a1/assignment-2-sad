@@ -74,4 +74,35 @@ public class JobServiceImpl implements JobService {
     public List findLimit() {
         return jobDAO.findLimit();
     }
+
+    @Override
+    public List findByLocation(String address) {
+        return jobDAO.findByLocation(address);
+    }
+
+    @Override
+    public List findByCategory(int categoryID) {
+        return jobDAO.findByCategory(categoryID);
+    }
+
+    @Override
+    public List findByCategoryAndLocation(int categoryID, String address) {
+        return jobDAO.findByCategoryAndLocation(categoryID,address);
+    }
+
+    @Override
+    public List findByCategoryAndSalary(int categoryID, int min, int max) {
+        return jobDAO.findByCategoryAndSalary(categoryID,min,max);
+    }
+
+    @Override
+    public List findByLocationAndSalary(String address, int min, int max) {
+        return jobDAO.findByLocationAndSalary(address,min,max);
+    }
+
+    @Override
+    public List findByCategoryAndLocationAndSalary(int categoryID, String address, int min, int max){
+        return jobDAO.findByCategoryAndLocationAndSalary(categoryID,address,min,max);
+    }
+
 }
