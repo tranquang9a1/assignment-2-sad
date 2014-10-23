@@ -23,8 +23,8 @@ public class CommentDAOImpl extends BaseDAOImpl<Comment> implements CommentDAO<C
 
     @Override
     public List findToday() {
+        EntityManager em = emf.createEntityManager();
         Query query = em.createQuery("Select e From Comment e where e.create_date = current_date ");
-
         return query.getResultList();
     }
 }

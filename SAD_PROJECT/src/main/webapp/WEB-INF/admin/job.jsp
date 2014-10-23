@@ -30,33 +30,50 @@
                         <table class="table table-hover" id="dataTables-example">
                             <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>Job ID</th>
                                 <th>Job Name</th>
-                                <th>Job Description</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th >Job Description</th>
+                                <th >Jop Requirement</th>
+                                <th >Address</th>
+                                <th >Salary</th>
+                                <th >Number Recruit</th>
+                                <th >Status</th>
+                                <th >Create Date</th>
+                                <th >Deadline</th>
+                                <th >User ID</th>
+                                <th >User name</th>
+                                <th >Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             <c:forEach items="${sessionScope.Job}" var="job" varStatus="item" >
                                 <tr class="even gradeC">
-                                    <td>${job.jobID}</td>
-                                    <td>${job.jobName}</td>
-                                    <td>
+                                    <td  >${job.jobID}</td>
+                                    <td  >${job.jobName}</td>
+                                    <td  >${job.jobDescription}</td>
+                                    <td  >${job.jobRequirement}</td>
+                                    <td  >${job.address}</td>
+                                    <td  >${job.salary}</td>
+                                    <td  >${job.numberUser}</td>
+                                    <td  >
                                         <c:choose>
                                             <c:when test="${job.status}">
-                                                da
+                                                Approved
                                             </c:when>
                                             <c:otherwise>
-                                                Chua
+                                                <a href="changeStatus.do?jobID=${job.jobID}">Approve</a>
                                             </c:otherwise>
                                         </c:choose>
                                     </td>
-                                    <td class="center">${job.userID}</td>
+                                    <td  >
+                                        <fmt:formatDate type="date" value="${job.create_date}" />
+                                    </td  >
+                                    <td  >
+                                        <fmt:formatDate type="date" value="${job.deadline}" />
+                                    </td>
+                                    <td  >${job.userID}</td>
+                                    <td  >${job.username}</td>
                                     <td class="center">
-                                        <c:if test="${job.status == false}">
-                                            <a href="changeStatus.do?jobID=${job.jobID}" ><i class="glyphicon glyphicon-ok-sign" style="float: left; margin-left: 10px; cursor: pointer;" title="Approve"></i></a>
-                                        </c:if>
                                         <a href="deleteJob.do?jobID=${job.jobID}" ><i class="glyphicon glyphicon-trash" style="float: left; margin-left: 20px; cursor: pointer;" title="Delete"></i></a>
                                     </td>
                                 </tr>

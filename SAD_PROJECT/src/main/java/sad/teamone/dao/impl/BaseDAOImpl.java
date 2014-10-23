@@ -125,7 +125,6 @@ public abstract class BaseDAOImpl<T> implements BaseDAO<T> {
         } finally {
             em.close();
         }
-
         return result;
     }
 
