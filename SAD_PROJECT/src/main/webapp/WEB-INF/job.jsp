@@ -34,47 +34,30 @@
                         ${job.jobDescription}
                         <legend>Requirement</legend>
                         ${job.jobRequirement}
+                        <legend>Comment</legend>
+                        <c:if test="${not empty sessionScope.LISTCOMMENT}">
+                            <c:forEach var="comment" items="${sessionScope.LISTCOMMENT}" varStatus="item">
+                                <h3>User:</h3> ${comment.user.username}<br./>
+                                <h4>Content: </h4>${comment.description}<br/>
+                                <h5>At: </h5>${comment.create_date}
+
+                            </c:forEach>
+
+                        </c:if>
+
+
                         <legend>Apply</legend>
-                        <form>
-                            <div class="row">
-                                <div class="col-xs-12 col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Full name</label>
-                                        <input type="text" class="form-control input-lg">
-                                        <small class="help-block">Example block-level help text here.</small>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Emaill address</label>
-                                        <input type="email" class="form-control input-lg">
-                                        <small class="help-block">Example block-level help text here.</small>
-                                    </div>
-                                </div>
-                            </div>
+                        <form action="comment.do" method="POST" accept-charset="UTF-8">
                             <div class="form-group">
                                 <label>Message to company</label>
-                                <textarea rows="3" class="form-control"></textarea>
-                                <small class="help-block">Example block-level help text here.</small>
+                                <textarea rows="3" name="content" class="form-control"></textarea>
                             </div>
-                            <div class="row">
-                                <div class="col-xs-12 col-md-6">
-                                    <div class="form-group">
-                                        <label>Upload cover letter</label>
-                                        <input type="file" class="">
-                                        <small class="help-block">Example block-level help text here.</small>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-md-6">
-                                    <div class="form-group">
-                                        <label>Upload resume / cv</label>
-                                        <input type="file" class="">
-                                        <small class="help-block">Example block-level help text here.</small>
-                                    </div>
-                                </div>
-                            </div>
+                            <input type="hidden" name="username" id="username" value="${sessionScope.user.username}"/>
+                            <input type="hidden" name="userID" id="userID" value="${sessionScope.user.userID}"/>
+                            <input type="hidden" name="idtopic" id="idtopic" value="${job.jobID}"/>
+
                             <br>
-                            <button type="submit" class="btn btn-primary input-lg">Submit application</button>
+                            <button type="submit" class="btn btn-primary input-lg">Submit</button>
                         </form>
 
                     </div>

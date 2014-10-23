@@ -29,6 +29,12 @@ public class Comment {
     public Comment() {
     }
 
+    public Comment(String description, Date create_date, User user) {
+        this.description = description;
+        this.create_date = create_date;
+        this.user = user;
+    }
+
     public Integer getCommentID() {
         return commentID;
     }

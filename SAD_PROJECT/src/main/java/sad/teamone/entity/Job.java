@@ -59,7 +59,7 @@ public class Job {
     )
     private List<Category> categories = new ArrayList<Category>();
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "jobID")
     private List<Comment> comments = new ArrayList<Comment>();
 
