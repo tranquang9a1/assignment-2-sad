@@ -27,7 +27,7 @@
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge">${sessionScope.countComment}</div>
-                            <div>New Comments!</div>
+                            <div>New Comments Today!</div>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge">${sessionScope.countUser}</div>
-                            <div>New User!</div>
+                            <div>New User Today!</div>
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge">${sessionScope.countJob}</div>
-                            <div>New Job!</div>
+                            <div>New Job Today!</div>
                         </div>
                     </div>
                 </div>

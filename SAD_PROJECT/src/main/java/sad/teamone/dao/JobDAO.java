@@ -11,4 +11,5 @@ public interface JobDAO<Job> extends BaseDAO<Job>{
     List findByStatus(Boolean status);
     List findUserId(int userID);
     List findToday();
+    List findLimit();
 }

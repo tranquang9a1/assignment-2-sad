@@ -63,11 +63,6 @@
 </div><!-- /.contents -->
 
 <!-- the botom client image -->
-<div class="clients">
-    <div class="container">
-        <img src="../img/clients.png" alt="clients" class="img-responsive">
-    </div>
-</div>
 
 <!-- the footer -->
 <jsp:include page="layout/footer.jsp"/>

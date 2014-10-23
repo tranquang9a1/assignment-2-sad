@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,8 +38,8 @@
     <div class="container">
         <div id="search-box">
             <h1>We currently have <strong>25,011</strong> job posts but only <strong>10,111</strong> applicants</h1>
-            <form class="form-inline">
-                <input type="text" class="btn-block" autofocus="autofocus" placeholder="Example: Software developer">
+            <form class="form-inline" action="search.do" method="GET" accept-charset="UTF-8">
+                <input type="text" class="btn-block" name="search" autofocus="autofocus" placeholder="Example: Software developer">
             </form>
         </div>
     </div>
@@ -121,109 +121,8 @@
                     Featured jobs
                     <span class="pull-right"><small>1 - 20 results</small></span>
                 </h3>
-                <table class="table table-striped">
-                    <tbody>
-                    <tr>
-                        <td>
-                            <p><a href="WEB-INF/job.html">Junior Applications Engineer</a> <small class="label label-success">Full time</small></p>
-                            <p>Google Enterprises</p>
-                        </td>
-                        <td class="job-location">
-                            <p><i class="glyphicon glyphicon-calendar"></i> 20 Jan 2013</p>
-                            <p><i class="glyphicon glyphicon-map-marker"></i> Berlin, Germany</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p><a href="WEB-INF/job.html">Senior Applications Engineer</a> <small class="label label-info">Freelance</small></p>
-                            <p>Youtube</p>
-                        </td>
-                        <td class="job-location">
-                            <p><i class="glyphicon glyphicon-calendar"></i> 22 Jun 2013</p>
-                            <p><i class="glyphicon glyphicon-map-marker"></i> Dresden, Germany</p>
-                        </td>
-                    </tr>
-                    <tr class="featured">
-                        <td>
-                            <p><a href="WEB-INF/job.html">Software Engineer</a> <small class="label label-warning">Part time</small></p>
-                            <p>Tesco Mall</p>
-                        </td>
-                        <td class="job-location">
-                            <p><i class="glyphicon glyphicon-calendar"></i> 01 Feb 2013</p>
-                            <p><i class="glyphicon glyphicon-map-marker"></i> Amsterdam, Holland</p>
-                        </td>
-                    </tr>
-                    <tr class="featured">
-                        <td>
-                            <p><a href="WEB-INF/job.html">Front-end Developer</a> <small class="label label-success">Full time</small></p>
-                            <p>Apple inc.</p>
-                        </td>
-                        <td class="job-location">
-                            <p><i class="glyphicon glyphicon-calendar"></i> 15 May 2013</p>
-                            <p><i class="glyphicon glyphicon-map-marker"></i> Bruge, Belgium</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p><a href="WEB-INF/job.html">Back-end Developer</a> <small class="label label-success">Full time</small></p>
-                            <p>Air France</p>
-                        </td>
-                        <td class="job-location">
-                            <p><i class="glyphicon glyphicon-calendar"></i> 10 May 2013</p>
-                            <p><i class="glyphicon glyphicon-map-marker"></i> Paris, France</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p><a href="WEB-INF/job.html">PHP Programmer</a> <small class="label label-warning">Part time</small></p>
-                            <p>Wizz Air</p>
-                        </td>
-                        <td class="job-location">
-                            <p><i class="glyphicon glyphicon-calendar"></i> 25 Jan 2013</p>
-                            <p><i class="glyphicon glyphicon-map-marker"></i> Oslo, Norway</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p><a href="WEB-INF/job.html">HMTL5/CSS3/JavaScript Coder</a> <small class="label label-info">Freelance</small></p>
-                            <p>Small Agency</p>
-                        </td>
-                        <td class="job-location">
-                            <p><i class="glyphicon glyphicon-calendar"></i> 19 Mar 2013</p>
-                            <p><i class="glyphicon glyphicon-map-marker"></i> Califonia, USA</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p><a href="WEB-INF/job.html">Java Programmer</a> <small class="label label-info">Freelance</small></p>
-                            <p>Google Enterprises</p>
-                        </td>
-                        <td class="job-location">
-                            <p><i class="glyphicon glyphicon-calendar"></i> 08 Jul 2013</p>
-                            <p><i class="glyphicon glyphicon-map-marker"></i> Berlin, Germany</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p><a href="WEB-INF/job.html">IOS Developer</a> <small class="label label-info">Freelance</small></p>
-                            <p>6wunderers</p>
-                        </td>
-                        <td class="job-location">
-                            <p><i class="glyphicon glyphicon-calendar"></i> 11 Feb 2013</p>
-                            <p><i class="glyphicon glyphicon-map-marker"></i> Frankfurt, Germany</p>
-                        </td>
-                    </tr>
-                    <tr class="featured">
-                        <td>
-                            <p><a href="WEB-INF/job.html">C# .NET Developer</a> <small class="label label-info">Freelance</small></p>
-                            <p>Microsoft Corp.</p>
-                        </td>
-                        <td class="job-location">
-                            <p><i class="glyphicon glyphicon-calendar"></i> 22 Dec 2013</p>
-                            <p><i class="glyphicon glyphicon-map-marker"></i> Cape Town, South Africa</p>
-                        </td>
-                    </tr>
-                    </tbody>
+                <table id="tblData" class="table table-striped">
+
                 </table>
                 <div class="pull-right">
                     <ul class="pagination">
@@ -243,15 +142,11 @@
 </div><!-- /.contents -->
 
 <!-- the botom client image -->
-<div class="clients">
-    <div class="container">
-        <img src="img/clients.png" alt="clients" class="img-responsive">
-    </div>
-</div>
 
 <!-- the footer -->
-<jsp:include page="WEB-INF/layout/footer.jsp"/>
 
+<jsp:include page="WEB-INF/layout/footer.jsp"/>
+<script type="text/javascript" src="js/index/index.js"></script>
 </body>
 </html>
 

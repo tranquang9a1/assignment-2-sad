@@ -20,4 +20,5 @@ public interface JobService {
     List findByStatus(Boolean status);
     List findUserId(int userID);
     List findToday();
+    List findLimit();
 }

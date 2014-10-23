@@ -42,6 +42,7 @@ public class JobController {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         if (user == null) {
+            session.setAttribute("currentURL", "WEB-INF/postJob.jsp");
             return "WEB-INF/signin.jsp";
         }
         return "WEB-INF/postJob.jsp";
@@ -110,5 +111,40 @@ public class JobController {
         results.add(job2);
 
         return results;
+    }
+
+    @RequestMapping(url = "/search.do")
+    public String doSearch(HttpServletRequest request, HttpServletResponse response) {
+        String keyword = request.getParameter("search");
+        List<Job> result = jobService.findByName(keyword);
+        if (result == null) {
+            return "error.jsp";
+        }
+        HttpSession session = request.getSession();
+
+        request.setAttribute("LISTJOB", result);
+
+        return "WEB-INF/searchresult.jsp";
+    }
+
+    @RequestMapping(url = "/job.do")
+    public String getSingleJob(HttpServletRequest request, HttpServletResponse response) {
+        String id = request.getParameter("id");
+        Job job = jobService.find(Integer.parseInt(id));
+        HttpSession session = request.getSession();
+        session.setAttribute("SINGLEJOB", job);
+
+        if(session.getAttribute("user") == null) {
+            session.setAttribute("currentURL", "WEB-INF/job.jsp");
+            return "WEB-INF/signin.jsp";
+        }
+        return "WEB-INF/job.jsp";
+    }
+
+    @RequestMapping(url = "/findLimitJobs.do")
+    @ResponeBody
+    public Object findLimit(HttpServletRequest request, HttpServletResponse response) {
+        List<Job> listJob = jobService.findLimit();
+        return listJob;
     }
 }
