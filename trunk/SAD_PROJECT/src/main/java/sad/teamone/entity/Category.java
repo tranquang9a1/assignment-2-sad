@@ -16,13 +16,7 @@ public class Category {
     @Column(name = "categoryID")
     private Integer categoryID;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "tbl_job_category",
-            joinColumns =
-                @JoinColumn(name = "categoryID", referencedColumnName = "categoryID"),
-            inverseJoinColumns =
-                @JoinColumn(name = "jobID", referencedColumnName = "jobID")
-    )
+    @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
     private List<Job> jobs = new ArrayList<Job>();
 
     @Column(name = "categoryName")

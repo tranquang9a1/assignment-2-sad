@@ -47,7 +47,13 @@ public class Job {
     @Column(name = "create_date")
     private Date create_date;
 
-    @ManyToMany(mappedBy = "jobs", fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "tbl_job_category",
+            joinColumns =
+            @JoinColumn(name = "jobID", referencedColumnName = "jobID"),
+            inverseJoinColumns =
+            @JoinColumn(name = "categoryID", referencedColumnName = "categoryID")
+    )
     private List<Category> categories = new ArrayList<Category>();
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -60,6 +66,20 @@ public class Job {
 
     // Constructors
     public Job() {
+    }
+
+    public Job(String jobName, String jobDescription, String jobRequirement, String address, Integer salary, Integer numberUser, Date deadline, Date create_date, Integer userID, List<Category> categories, Boolean status) {
+        this.jobName = jobName;
+        this.jobDescription = jobDescription;
+        this.jobRequirement = jobRequirement;
+        this.address = address;
+        this.salary = salary;
+        this.numberUser = numberUser;
+        this.deadline = deadline;
+        this.create_date = create_date;
+        this.userID = userID;
+        this.categories = categories;
+        this.status = status;
     }
 
     // Getters and setters
