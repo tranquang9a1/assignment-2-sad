@@ -6,13 +6,14 @@ $(document).ready(function(){
     $.ajax({
         url: '/findLimitJobs.do',
         type: 'GET',
+        dataType:'JSON',
         success: function(listJob) {
             var dataString = "";
             $.each(listJob, function(index, job) {
                 dataString +=
                     "<tr>"
                         + "<td>"
-                            + "<p><a href='WEB-INF/job.html'>" + job.jobName + "</a> <small class='label label-success'>" + job.jobName + "</small></p>"
+                            + "<p><a href='job.do?id='+job.jobID>" + job.jobName + "</a> <small class='label label-success'>" + job.jobName + "</small></p>"
                             + "<p>Google Enterprises</p>"
                         + "</td>"
                         + "<td class='job-location'>"
@@ -22,7 +23,7 @@ $(document).ready(function(){
                     + "</tr>"
             });
 
-            $('#jobTable').append(dataString);
+            $('#tblData').append(dataString);
         }
     });
 });

@@ -69,4 +69,9 @@ public class JobServiceImpl implements JobService {
     public List findToday() {
         return jobDAO.findToday();
     }
+
+    @Override
+    public List findLimit() {
+        return jobDAO.findLimit();
+    }
 }

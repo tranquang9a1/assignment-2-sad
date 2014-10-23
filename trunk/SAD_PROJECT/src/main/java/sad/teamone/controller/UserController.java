@@ -71,6 +71,9 @@ public class UserController {
         // Create new session
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
+        if(session.getAttribute("currentURL") != null) {
+            return (String)session.getAttribute("currentURL");
+        }
         return "index.jsp";
     }
 

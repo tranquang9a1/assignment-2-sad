@@ -45,7 +45,14 @@ public class JobDAOImpl extends BaseDAOImpl<Job> implements JobDAO<Job> {
 
     @Override
     public List findToday() {
-        Query query = em.createQuery("Select e From Job e where e.create_date = current_date ");
+        Query query = em.createQuery("Select e From Job e where e.status = false ");
+        return query.getResultList();
+    }
+
+    @Override
+    public List findLimit() {
+        Query query = em.createQuery("Select e From Job e order by e.create_date");
+        query.setMaxResults(20);
         return query.getResultList();
     }
 

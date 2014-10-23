@@ -50,7 +50,8 @@
             <div class="navbar-right">
                 <c:choose>
                     <c:when test="${not empty sessionScope.user}">
-                        <a href="/profile.do" class="navbar-brand"><strong>Wellcome "${sessionScope.user.username}" <img src="${sessionScope.user.avatar}" style="height: 30px; width: 30px"> </strong></a>
+                        <a href="/profile.do" class="navbar-header" style="padding-top: 8px;padding-right: 15px;font-size: 20px;color: white;">
+                            <strong>Welcome "${sessionScope.user.username}" <img src="${sessionScope.user.avatar}" style="height: 30px; width: 30px"> </strong></a>
                         <a href="/logout.do" class="btn btn-warning navbar-btn">Log out</a>
                     </c:when>
                     <c:otherwise>
