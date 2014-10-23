@@ -1,8 +1,4 @@
-<<<<<<< .mine
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-=======
- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
->>>>>>> .r24
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,7 +55,7 @@
             <label>Job category</label>
             <select class="form-control input-lg" name="cbbCategory" id="cbbCategory">
                 <option></option>
-                <option value="1">Networking</option>
+                <option value="1" selected>Networking</option>
                 <option value="2">Sales & Marketing</option>
                 <option value="3">Teaching</option>
                 <option value="4">Programming</option>
@@ -69,7 +65,7 @@
             <label>Location</label>
             <select class="form-control input-lg" id="cbbLocation" name="cbbLocation">
                 <option></option>
-                <option value="America">America</option>
+                <option value="America" selected>America</option>
                 <option value="Europe">Europe</option>
                 <option value="Africa">Africa</option>
                 <option value="Asia">Asia</option>
@@ -80,7 +76,7 @@
             <label>Salary</label>
             <select class="form-control input-lg" id="cbbSalary" name="cbbSalary">
                 <option></option>
-                <option value="1">$500 - $2000</option>
+                <option value="1" selected>$500 - $2000</option>
                 <option value="2">$2000 - $5000</option>
                 <option value="3">$5000+</option>
             </select>
@@ -112,7 +108,7 @@
         <c:if test="${i%3 == 0}">
             <tr>
                 <td>
-                    <p><a href="WEB-INF/job.html">${job.jobName}</a>
+                    <p><a href="job.do?id=${job.jobID}">${job.jobName}</a>
                         <small class="label label-success">Full time</small>
                     </p>
                     <p>${job.username}</p>
@@ -126,7 +122,7 @@
         <c:if test="${i%3 == 1}">
             <tr>
                 <td>
-                    <p><a href="WEB-INF/job.html">${job.jobName}</a>
+                    <p><a href="job.do?id=${job.jobID}">${job.jobName}</a>
                         <small class="label label-warning">Part time</small>
                     </p>
                     <p>${job.username}</p>
@@ -141,7 +137,7 @@
         <c:if test="${i%3 == 2}">
             <tr>
                 <td>
-                    <p><a href="WEB-INF/job.html">${job.jobName}</a>
+                    <p><a href="job.do?id=${job.jobID}">${job.jobName}</a>
                         <small class="label label-info">Freelance</small>
                     </p>
                     <p>${job.username}</p>
