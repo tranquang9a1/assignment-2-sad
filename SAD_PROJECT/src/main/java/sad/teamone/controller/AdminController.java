@@ -141,7 +141,8 @@ public class AdminController {
         int id = Integer.parseInt(userID);
         User user = userService.find(id);
         Boolean result = userService.remove(id);
-        if(result) {
+        if(result)
+        {
             List listUser = userService.findAll();
             HttpSession session = request.getSession();
             session.setAttribute("User", listUser);
@@ -180,7 +181,8 @@ public class AdminController {
         int id = Integer.parseInt(commentID);
         Comment comment = commentService.find(id);
         Boolean result = commentService.remove(id);
-        if(result){
+        if(result)
+        {
             response.sendRedirect("admincomment.do");
         }
     }
@@ -211,13 +213,9 @@ public class AdminController {
     @RequestMapping(url = "/searchuser.do", method = RequestMethod.POST)
     public String searchUser(HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
-
-
         String username = request.getParameter("txtSearch");
         List userList = userService.findByName(username);
-
         session.setAttribute("User", userList);
-
         return "WEB-INF/admin/user.jsp";
     }
 
@@ -225,10 +223,8 @@ public class AdminController {
     public String searchJob(HttpServletRequest request, HttpServletResponse response)  {
         String jobname = request.getParameter("txtJobName");
         List job = jobService.findByName(jobname);
-
         HttpSession session = request.getSession();
         session.setAttribute("Job", job);
-
         return  "WEB-INF/admin/job.jsp";
     }
 }

@@ -87,12 +87,13 @@
                 <ul class="nav" id="side-menu">
                     <li class="sidebar-search">
                         <div class="input-group custom-search-form">
-                            <div class="pull-left image">
-                                <img src="../../../admin/img/gaucho.jpg" class="img-circle" alt="User Image" style="width: 70px; height: 50px;"/>
-                            </div>
-                            <div class="pull-left info">
-                                <p style="padding-left: 15px;">Administrator</p>
-                            </div>
+
+                                <div class="pull-left image">
+                                    <img src="../../../admin/img/gaucho.jpg" class="img-circle" alt="User Image" style="width: 70px; height: 50px;"/>
+                                </div>
+                                <div class="pull-left info">
+                                    <p style="padding-left: 15px;">Hello!, ${user.username}</p>
+                                </div>
 
                         </div>
                         <!-- /input-group -->

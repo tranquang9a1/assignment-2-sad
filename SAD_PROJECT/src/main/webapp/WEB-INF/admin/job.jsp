@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: QuangTV
@@ -72,6 +73,7 @@
                                     </td>
                                     <td  >
                                         <fmt:formatDate type="date" value="${job.create_date}" />
+
                                     </td  >
                                     <td  >
                                         <fmt:formatDate type="date" value="${job.deadline}" />
