@@ -50,7 +50,7 @@
 <div class="col-xs-12 col-md-3">
     <h3 class="sub-heading">Advance search</h3>
 
-    <form role="form" action="/advanceSearchJob.do" method="post" enctype="application/x-www-form-urlencoded">
+    <form action="/advanceSearchJob.do" method="post" enctype="application/x-www-form-urlencoded">
         <div class="form-group">
             <label>Job category</label>
             <select class="form-control input-lg" name="cbbCategory" id="cbbCategory">
@@ -102,16 +102,16 @@
 </h3>
 <table id="tblData" class="table table-striped">
     <tbody>
-    <c:set var="list" value="${requestScope.LIST_JOB}"></c:set>
-    <c:set var="i" value="1"></c:set>
+    <c:set var="list" value="${requestScope.LIST_JOB}"/>
+    <c:set var="i" value="1"/>
     <c:forEach var="job" items="${list}">
         <c:if test="${i%3 == 0}">
             <tr>
                 <td>
-                    <p><a href="job.do?id=${job.jobID}">${job.jobName}</a>
+                    <h3><a href="job.do?id=${job.jobID}">${job.jobName}</a>
                         <small class="label label-success">Full time</small>
-                    </p>
-                    <p>${job.username}</p>
+                    </h3>
+                    <a href="/viewUser.do?userID=${job.userID}">${job.username}</a>
                 </td>
                 <td class="job-location">
                     <p><i class="glyphicon glyphicon-calendar"></i>${job.deadline}</p>
@@ -122,10 +122,10 @@
         <c:if test="${i%3 == 1}">
             <tr>
                 <td>
-                    <p><a href="job.do?id=${job.jobID}">${job.jobName}</a>
+                    <h3><a href="job.do?id=${job.jobID}">${job.jobName}</a>
                         <small class="label label-warning">Part time</small>
-                    </p>
-                    <p>${job.username}</p>
+                    </h3>
+                    <a href="/viewUser.do?userID=${job.userID}">${job.username}</a>
                 </td>
                 <td class="job-location">
                     <p><i class="glyphicon glyphicon-calendar"></i>${job.deadline}</p>
@@ -137,10 +137,10 @@
         <c:if test="${i%3 == 2}">
             <tr>
                 <td>
-                    <p><a href="job.do?id=${job.jobID}">${job.jobName}</a>
+                    <h3><a href="job.do?id=${job.jobID}">${job.jobName}</a>
                         <small class="label label-info">Freelance</small>
-                    </p>
-                    <p>${job.username}</p>
+                    </h3>
+                    <a href="/viewUser.do?userID=${job.userID}">${job.username}</a>
                 </td>
                 <td class="job-location">
                     <p><i class="glyphicon glyphicon-calendar"></i>${job.deadline}</p>
@@ -148,7 +148,7 @@
                 </td>
             </tr>
         </c:if>
-        <c:set var="i" value="${i+1}"></c:set>
+        <c:set var="i" value="${i+1}"/>
     </c:forEach>
     </tbody>
 </table>

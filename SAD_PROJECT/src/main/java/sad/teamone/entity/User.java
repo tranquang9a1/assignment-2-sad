@@ -48,8 +48,7 @@ public class User {
     )
     private List<Skill> skills = new ArrayList<Skill>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "userID")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<JobApplied> jobApplieds = new ArrayList<JobApplied>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -65,6 +64,8 @@ public class User {
         this.password=password;
         this.email=email;
         this.create_date=create_date;
+        this.isAdmin=false;
+        this.sex=true;
     }
    // Getters and setters
 

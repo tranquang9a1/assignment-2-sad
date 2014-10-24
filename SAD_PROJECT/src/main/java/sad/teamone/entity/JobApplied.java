@@ -15,11 +15,11 @@ public class JobApplied {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(nullable=false, updatable=false)
+    @JoinColumn(name = "jobID",nullable=false, updatable=false)
     private Job job;
 
     @ManyToOne
-    @JoinColumn(nullable=false, updatable=false)
+    @JoinColumn(name = "userID",nullable=false, updatable=false)
     private User user;
 
     @Column(name = "create_date")
@@ -27,6 +27,12 @@ public class JobApplied {
 
     // Constructors
     public JobApplied() {
+    }
+
+    public JobApplied(Job job, User user, Date create_date) {
+        this.job=job;
+        this.user=user;
+        this.create_date=create_date;
     }
 
     // Getters and setters

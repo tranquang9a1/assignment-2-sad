@@ -63,8 +63,7 @@ public class Job {
     @JoinColumn(name = "jobID")
     private List<Comment> comments = new ArrayList<Comment>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "jobID")
+    @OneToMany(mappedBy = "job",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<JobApplied> jobApplieds = new ArrayList<JobApplied>();
 
     // Constructors
