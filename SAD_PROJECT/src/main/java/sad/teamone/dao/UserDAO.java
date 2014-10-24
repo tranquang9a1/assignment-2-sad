@@ -12,5 +12,6 @@ public interface UserDAO<User> extends BaseDAO<User> {
     User login(String username, String password);
     List findToday();
     List<User> findAll();
-    sad.teamone.entity.User findByID(int ID);
+    User findByID(int ID);
+    List findByName(String name);
 }

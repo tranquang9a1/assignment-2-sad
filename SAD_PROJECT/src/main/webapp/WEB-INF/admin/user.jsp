@@ -28,7 +28,10 @@
             <div class="panel-body">
                 <a href="listAllUser.do">Show all</a>
                 <a href="adminuser.do">Today</a>
-
+                <form action="searchuser.do" method="post">
+                  <input name="txtSearch" type="text" placeholder="Search..."/>
+                  <button type="submit" name="btnSearch">Search</button>
+                </form>
                 <div class="table-responsive">
                     <table class="table table-hover" id="dataTables-example">
                         <thead>
