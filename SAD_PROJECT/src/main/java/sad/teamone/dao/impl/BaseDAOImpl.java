@@ -134,7 +134,7 @@ public abstract class BaseDAOImpl<T> implements BaseDAO<T> {
         List result = new ArrayList<T>();
         try {
             em.getTransaction().begin();
-            Query query = em.createQuery("Select e From " + entityClass.getSimpleName() + " e");
+            Query query = em.createQuery("Select e From " + entityClass.getSimpleName() + " e order by e.create_date desc" );
             result = query.getResultList();
             em.getTransaction().commit();
         } catch (Exception ex) {

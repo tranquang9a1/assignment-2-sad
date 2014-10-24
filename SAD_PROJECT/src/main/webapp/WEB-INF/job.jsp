@@ -17,92 +17,58 @@
     <section id="job">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-md-3">
-                    <h3 class="sub-heading">About Google</h3>
-
-                    <p><strong>Google Enterprises</strong></p>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum at augue metus, at aliquam
-                        leo. Nam ac justo nisl. Ut non orci odio. Praesent lobortis blandit lacus et consectetur. Etiam
-                        ac sagittis tortor. Vestibulum vestibulum sem nec purus congue cursus. Sed bibendum lectus id
-                        tellus egestas sit amet interdum leo fringilla. Fusce dictum neque ut massa facilisis nec mattis
-                        erat blandit. In vel vestibulum massa.</p>
-
-                    <p><a href="">company website &rarr;</a></p>
-                </div>
-                <c:set var="job" value="${sessionScope.SINGLEJOB}"/>
+                <c:set var="job" value="${sessionScope.SINGLEJOB}" />
                 <div class="col-xs-12 col-md-9">
-                    <h3 class="sub-heading">Job detail <span class="pull-right"><small><a href="/index.do">&larr; All
-                        Jobs</a></small></span></h3>
+                    <h3 class="sub-heading">Job detail <span class="pull-right"><small><a href="index.jsp">&larr; All Jobs</a></small></span></h3>
                     <div class="content-inner-detail">
                         <h1 class="sub-heading">${job.jobName}</h1>
-
-                        <p><i class="glyphicon glyphicon-calendar"></i> ${job.create_date} | <i
-                                class="glyphicon glyphicon-map-marker"></i> ${job.address} | <span
-                                class="label label-success">Freelance</span></p>
+                        <p><i class="glyphicon glyphicon-calendar"></i> ${job.create_date} | <i class="glyphicon glyphicon-map-marker"></i> ${job.address} | <span class="label label-success">Freelance</span></p>
                         <hr>
                         <legend>Overview</legend>
                         ${job.jobDescription}
+                        <li>
+                            <ul>Number: ${job.numberUser}</ul>
+                        </li>
+                        <li><ul>Salary: ${job.salary}</ul></li>
+                        <li><ul>Deadline: ${job.deadline}</ul></li>
                         <legend>Requirement</legend>
                         ${job.jobRequirement}
                         <legend>Comment</legend>
                         <c:if test="${not empty sessionScope.LISTCOMMENT}">
                             <c:forEach var="comment" items="${sessionScope.LISTCOMMENT}" varStatus="item">
-                                <h3>User:</h3> ${comment.user.username}
-                                <br./>
-                                <h4>Content: </h4>${comment.description}<br/>
-                                <h5>At: </h5>${comment.create_date}
+
+                                <img src="${comment.user.avatar}" style="width: 100px; height: 100px; display: inline;"/>
+
+                                <h5 style="display: inline;">User: ${comment.user.username}<br/>
+                                At: ${comment.create_date}<br/>
+                                Content: ${comment.description}</h5>
+                                <hr/>
 
                             </c:forEach>
 
                         </c:if>
 
-                        <div class="form-group">
-                            <legend>Applied list</legend>
+
+                        <legend>Apply</legend>
+                        <form action="comment.do" method="POST" accept-charset="UTF-8">
                             <div class="form-group">
-                                <c:set var="listApplied" value="${job.jobApplieds}"/>
-                                <c:if test="${listApplied.size()>0}">
-                                    <c:forEach var="jobApplied" items="${listApplied}">
-                                        <c:set var="USER" value="${jobApplied.user}"/>
-                                        <c:set var="username" value="${USER.username}"/>
-                                        <a href="/viewUser.do?userID=${USER.userID}"> &nbsp; ${username} &nbsp; |</a>
-                                    </c:forEach>
-                                </c:if>
-                            </div>
-                            <form action="/applyJob.do?id=${job.jobID}" method="POST">
-                                <c:choose>
-                                    <c:when test="${(USER.userID == sessionScope.user.userID) || job.userID == sessionScope.user.userID}">
-                                        <button type="submit" disabled="disabled" class="btn btn-primary input-lg">Apply
-                                            for this job
-                                        </button>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <button type="submit" class="btn btn-primary input-lg">Apply for this job
-                                        </button>
-                                    </c:otherwise>
-                                </c:choose>
-                            </form>
-                        </div>
-                        <div class="form-group">
-                            <form action="comment.do" method="POST" accept-charset="UTF-8">
                                 <label>Message to company</label>
                                 <textarea rows="3" name="content" class="form-control"></textarea>
+                            </div>
+                            <input type="hidden" name="username" id="username" value="${sessionScope.user.username}"/>
+                            <input type="hidden" name="userID" id="userID" value="${sessionScope.user.userID}"/>
+                            <input type="hidden" name="idtopic" id="idtopic" value="${job.jobID}"/>
 
-                                <input type="hidden" name="username" id="username"
-                                       value="${sessionScope.user.username}"/>
-                                <input type="hidden" name="userID" id="userID" value="${sessionScope.user.userID}"/>
-                                <input type="hidden" name="idtopic" id="idtopic" value="${job.jobID}"/>
-                                <br>
-                                <button type="submit" class="btn btn-primary input-sm">Comment</button>
-                            </form>
-                        </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary input-lg">Submit</button>
+                        </form>
+
                     </div>
                 </div>
             </div>
         </div>
     </section>
-</div>
-<!-- /.contents -->
+</div><!-- /.contents -->
 
 <jsp:include page="layout/footer.jsp"/>
 
