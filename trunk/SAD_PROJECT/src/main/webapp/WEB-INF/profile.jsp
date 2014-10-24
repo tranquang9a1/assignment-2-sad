@@ -65,7 +65,7 @@
                     <div class="col-lg-12">
                         <div class="col-lg-4 form-group">
                             <label for="txtUser">Username: </label>
-                            <input type="text" value="${sessionScope.user.username}" disabled="true" maxlength="25"
+                            <input type="text" value="${sessionScope.user.username}" disabled="disabled" maxlength="25"
                                    required="true" class="form-control input-lg" id="txtUser" placeholder="Username"
                                    name="txtUsername">
                         </div>
@@ -118,33 +118,33 @@
                     <div class="col-lg-12">
                         <div class="col-lg-4 form-group">
                             <label for="txtCreateDate">Create date:</label>
-                            <input type="datetime" value="${sessionScope.user.create_date}" disabled="true"
+                            <input type="datetime" value="${sessionScope.user.create_date}" disabled="disabled"
                                    class="form-control input-lg" id="txtCreateDate" name="txtCreateDate">
                         </div>
                         <div class="col-lg-1">
                         </div>
                         <div class="col-lg-7 form-group">
                             <label id="lbSkill">Skill:</label></br>
-                            <c:set var="flag1" value=""></c:set>
-                            <c:set var="flag2" value=""></c:set>
-                            <c:set var="flag3" value=""></c:set>
-                            <c:set var="flag4" value=""></c:set>
-                            <c:set var="flag5" value=""></c:set>
+                            <c:set var="flag1" value=""/>
+                            <c:set var="flag2" value=""/>
+                            <c:set var="flag3" value=""/>
+                            <c:set var="flag4" value=""/>
+                            <c:set var="flag5" value=""/>
                             <c:forEach items="${sessionScope.user.skills}" var="skill">
                                 <c:if test="${skill.skillID == 1}">
-                                    <c:set var="flag1" value="checked"></c:set>
+                                    <c:set var="flag1" value="checked"/>
                                 </c:if>
                                 <c:if test="${skill.skillID == 2}">
-                                    <c:set var="flag2" value="checked"></c:set>
+                                    <c:set var="flag2" value="checked"/>
                                 </c:if>
                                 <c:if test="${skill.skillID == 3}">
-                                    <c:set var="flag3" value="checked"></c:set>
+                                    <c:set var="flag3" value="checked"/>
                                 </c:if>
                                 <c:if test="${skill.skillID == 4}">
-                                    <c:set var="flag4" value="checked"></c:set>
+                                    <c:set var="flag4" value="checked"/>
                                 </c:if>
                                 <c:if test="${skill.skillID == 5}">
-                                    <c:set var="flag5" value="checked"></c:set>
+                                    <c:set var="flag5" value="checked"/>
                                 </c:if>
                             </c:forEach>
                             <input type="checkbox" id="cbSkill1" name="cbSkill" value="1" ${flag1}>Java &nbsp;&nbsp;

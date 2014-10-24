@@ -64,9 +64,26 @@ public class UserController {
 
     @RequestMapping(url = "/index.do")
     public String indexPage(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        List listJob = jobService.findAll();
-        request.setAttribute("LIST_JOB",listJob);
+        List listJob = jobService.findByStatus(true);
+        request.setAttribute("LIST_JOB", listJob);
         return "index.jsp";
+    }
+
+    @RequestMapping(url = "/viewUser.do")
+    public String viewUser(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        HttpSession session = request.getSession();
+        if(session.getAttribute("user") == null) {
+            return "WEB-INF/signin.jsp";
+        }
+        String userID = request.getParameter("userID");
+        User user = userService.find(Integer.parseInt(userID));
+        if (user == null) {
+            List listJob = jobService.findByStatus(true);
+            request.setAttribute("LIST_JOB", listJob);
+            return "index.jsp";
+        }
+        request.setAttribute("USER_INFO", user);
+        return "WEB-INF/userInfo.jsp";
     }
 
     @RequestMapping(url = "/login.do", method = RequestMethod.POST)
@@ -84,10 +101,10 @@ public class UserController {
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
 
-        List listJob = jobService.findAll();
-        request.setAttribute("LIST_JOB",listJob);
-        if(session.getAttribute("currentURL") != null) {
-            return (String)session.getAttribute("currentURL");
+        List listJob = jobService.findByStatus(true);
+        request.setAttribute("LIST_JOB", listJob);
+        if (session.getAttribute("currentURL") != null) {
+            return (String) session.getAttribute("currentURL");
         }
         return "index.jsp";
     }
@@ -98,8 +115,8 @@ public class UserController {
         if (session != null) {
             session.invalidate();
         }
-        List listJob = jobService.findAll();
-        request.setAttribute("LIST_JOB",listJob);
+        List listJob = jobService.findByStatus(true);
+        request.setAttribute("LIST_JOB", listJob);
         return "index.jsp";
     }
 
@@ -124,8 +141,8 @@ public class UserController {
         session.setAttribute("user", user);
         log.info("Insert new user: " + user);
 
-        List listJob = jobService.findAll();
-        request.setAttribute("LIST_JOB",listJob);
+        List listJob = jobService.findByStatus(true);
+        request.setAttribute("LIST_JOB", listJob);
         return "index.jsp";
     }
 

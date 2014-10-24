@@ -19,7 +19,7 @@ public class Skill {
     @Column(name = "skillName")
     private String skillName;
 
-    @ManyToMany(mappedBy = "skills", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "skills", fetch = FetchType.EAGER)
     private List<User> users = new ArrayList<User>();
 
     public Skill() {

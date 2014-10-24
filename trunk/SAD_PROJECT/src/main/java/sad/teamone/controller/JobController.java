@@ -1,5 +1,6 @@
 package sad.teamone.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sad.teamone.common.annotation.Autowired;
@@ -7,12 +8,10 @@ import sad.teamone.common.annotation.Controller;
 import sad.teamone.common.annotation.RequestMapping;
 import sad.teamone.common.annotation.ResponeBody;
 import sad.teamone.common.constant.RequestMethod;
-import sad.teamone.entity.Category;
-import sad.teamone.entity.Job;
-import sad.teamone.entity.Skill;
-import sad.teamone.entity.User;
+import sad.teamone.entity.*;
 import sad.teamone.service.CategoryService;
 import sad.teamone.service.CommentService;
+import sad.teamone.service.JobAppliedService;
 import sad.teamone.service.JobService;
 
 import javax.servlet.ServletException;
@@ -39,7 +38,11 @@ public class JobController {
     @Autowired(id = "commentService")
     private CommentService commentService;
 
+    @Autowired(id="jobAppliedService")
+    private JobAppliedService jobAppliedService;
+
     private Logger log = LoggerFactory.getLogger(UserController.class);
+    private String currentURL;
 
     @RequestMapping(url = "/addJob.do")
     public String postJobPage(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -89,7 +92,7 @@ public class JobController {
             log.info("Job " + job + "is posted successfully");
         }
         session.setAttribute("user", user);
-        List listJob = jobService.findAll();
+        List listJob = jobService.findByStatus(true);
         request.setAttribute("LIST_JOB", listJob);
         return "index.jsp";
     }
@@ -136,7 +139,7 @@ public class JobController {
             }
         } else {
             if (categoryID.equals("") && location.equals("")) {
-                listJob = jobService.findAll();
+                listJob = jobService.findByStatus(true);
             } else if (categoryID.equals("") && !location.equals("")) {
                 listJob = jobService.findByLocation(location);
             } else if ((!categoryID.equals("") && location.equals(""))) {
@@ -147,6 +150,22 @@ public class JobController {
         }
         request.setAttribute("LIST_JOB", listJob);
         return "index.jsp";
+    }
+
+    @RequestMapping(url = "/applyJob.do", method = RequestMethod.POST)
+    public String applyJob(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        String jobID = request.getParameter("id");
+        Job job = jobService.find(Integer.parseInt(jobID));
+        JobApplied jobApplied = new JobApplied(job,user,new Date());
+        Boolean result = jobAppliedService.insert(jobApplied);
+
+        if(result){
+            log.info("Job is applied successfully");
+        }
+        getSingleJob(request,response);
+        return "WEB-INF/job.jsp";
     }
 
     /**

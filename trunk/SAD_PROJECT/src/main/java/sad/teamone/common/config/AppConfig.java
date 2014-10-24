@@ -7,6 +7,7 @@ import sad.teamone.common.annotation.Configuration;
 import sad.teamone.common.util.ProjectReflections;
 import sad.teamone.dao.*;
 import sad.teamone.dao.impl.*;
+import sad.teamone.entity.JobApplied;
 import sad.teamone.service.*;
 import sad.teamone.service.impl.*;
 
@@ -64,6 +65,11 @@ public class AppConfig {
         return new UserServiceImpl();
     }
 
+    @Bean(name = "jobAppliedService")
+    public JobAppliedService jobAppliedService() {
+        return new JobAppliedServiceImpl();
+    }
+
     // DAO Bean
     @Bean
     public CategoryDAO categoryDAO() {
@@ -94,6 +100,11 @@ public class AppConfig {
     @Bean(name = "userDAO")
     public UserDAO userDAO() {
         return new UserDAOImpl();
+    }
+
+    @Bean
+    public JobAppliedDAO jobAppliedDAO() {
+        return new JobAppliedDAOImpl();
     }
 
     /*********************************************************/
