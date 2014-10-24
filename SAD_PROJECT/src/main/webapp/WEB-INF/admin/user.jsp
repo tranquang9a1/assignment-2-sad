@@ -48,14 +48,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${sessionScope.User}" var="user" varStatus="item" >
+                            <c:forEach items="${sessionScope.User}" var="userInfo" varStatus="item" >
                                 <tr class="even gradeC">
-                                    <td>${user.userID}</td>
-                                    <td>${user.username}</td>
-                                    <td>${user.age}</td>
+                                    <td>${userInfo.userID}</td>
+                                    <td>${userInfo.username}</td>
+                                    <td>${userInfo.age}</td>
                                     <td>
                                         <c:choose>
-                                            <c:when test="${user.sex == true}">
+                                            <c:when test="${userInfo.sex == true}">
                                                 Nam
                                             </c:when>
                                             <c:otherwise>
@@ -63,16 +63,16 @@
                                             </c:otherwise>
                                         </c:choose>
                                     </td>
-                                    <td>${user.email}</td>
-                                    <td>${user.address}</td>
-                                    <td>${user.avatar}</td>
-                                    <td>${user.description}</td>
+                                    <td>${userInfo.email}</td>
+                                    <td>${userInfo.address}</td>
+                                    <td>${userInfo.avatar}</td>
+                                    <td>${userInfo.description}</td>
                                     <td>
-                                        <fmt:formatDate type="date" value="${user.create_date}" />
+                                        <fmt:formatDate type="date" value="${userInfo.create_date}" />
                                     </td>
                                     <td>
                                         <c:choose>
-                                            <c:when test="${user.isAdmin == true}">
+                                            <c:when test="${userInfo.isAdmin == true}">
                                                 Admin
                                             </c:when>
                                             <c:otherwise>
@@ -80,11 +80,11 @@
                                             </c:otherwise>
                                         </c:choose>
                                     </td>
-                                    <td>${user.password}</td>
+                                    <td>${userInfo.password}</td>
                                     <td class="center">
-                                        <c:if test="${user.isAdmin == false}">
-                                            <a href="changeRole.do?userID=${user.userID}">Set Admin</a>
-                                            <a href="deleteUser.do?userID=${user.userID}"><i class="glyphicon glyphicon-trash" style="float: left; margin-left: 20px; cursor: pointer;" title="Delete"></i></a>
+                                        <c:if test="${userInfo.isAdmin == false}">
+                                            <a href="changeRole.do?userID=${userInfo.userID}">Set Admin</a>
+                                            <a href="deleteUser.do?userID=${userInfo.userID}"><i class="glyphicon glyphicon-trash" style="float: left; margin-left: 20px; cursor: pointer;" title="Delete"></i></a>
                                         </c:if>
                                     </td>
                                 </tr>

@@ -18,4 +18,5 @@ public interface UserService {
     List findToday();
     List findAll();
     Boolean deleteByID(Integer id);
+    User findByID(int ID);
 }
