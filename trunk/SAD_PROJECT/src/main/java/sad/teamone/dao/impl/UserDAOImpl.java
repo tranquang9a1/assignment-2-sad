@@ -56,4 +56,17 @@ public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO<User> {
             return null;
         }
     }
+
+    @Override
+    public List findByName(String name) {
+        try {
+            EntityManager em = emf.createEntityManager();
+            Query query = em.createQuery("select a from User a where a.username LIKE :username");
+            query.setParameter("username", "%" + name +  "%");
+            return query.getResultList();
+        } catch (NoResultException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 }

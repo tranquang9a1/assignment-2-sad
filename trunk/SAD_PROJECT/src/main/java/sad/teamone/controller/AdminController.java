@@ -37,6 +37,8 @@ public class AdminController {
     private CommentService commentService;
 
     private Boolean showAll = false;
+
+
     @RequestMapping(url = "/admincp.do")
     public String admin(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
@@ -115,21 +117,6 @@ public class AdminController {
         return "WEB-INF/admin/job.jsp";
     }
 
-    @RequestMapping(url = "/approve.do")
-    public String approveJob(HttpServletRequest request, HttpServletResponse response) {
-
-        HttpSession session = request.getSession();
-        Integer index = Integer.valueOf(request.getParameter("index"));
-
-        List<Job> listJob = (List<Job>) session.getAttribute("Job");
-        listJob.get(index).setStatus(true);
-
-        session.setAttribute("Job", listJob);
-
-        return "job.jsp";
-
-    }
-
     @RequestMapping(url = "/listAllUser.do")
     public String showAllUser(HttpServletRequest request, HttpServletResponse response)  {
         HttpSession session = request.getSession();
@@ -149,15 +136,18 @@ public class AdminController {
     }
 
     @RequestMapping(url="/deleteUser.do")
-    public void deleteUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession();
+    public String deleteUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String userID = request.getParameter("userID");
         int id = Integer.parseInt(userID);
         User user = userService.find(id);
         Boolean result = userService.remove(id);
         if(result) {
-           response.sendRedirect("adminuser.do");
+            List listUser = userService.findAll();
+            HttpSession session = request.getSession();
+            session.setAttribute("User", listUser);
+            return "WEB-INF/admin/user.jsp";
         }
+        return null;
     }
 
     @RequestMapping(url = "/listAllJob.do")
@@ -169,15 +159,19 @@ public class AdminController {
     }
 
     @RequestMapping(url="/deleteJob.do")
-    public void deleteJob(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String deleteJob(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String jobID = request.getParameter("jobID");
         int id = Integer.parseInt(jobID);
         Job job = jobService.find(id);
         Boolean result = jobService.remove(id);
         if(result)
         {
-            response.sendRedirect("adminjob.do");
+            HttpSession session = request.getSession();
+            List listJob = jobService.findAll();
+            session.setAttribute("Job", listJob);
+            return "WEB-INF/admin/job.jsp";
         }
+        return null;
     }
 
     @RequestMapping(url="/deleteComment.do")
@@ -202,13 +196,39 @@ public class AdminController {
     }
 
     @RequestMapping(url="/changeRole.do")
-    public void changeRole(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String changeRole(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String userID = request.getParameter("userID");
         int id = Integer.parseInt(userID);
         User user = userService.find(id);
         user.setIsAdmin(true);
         userService.update(user);
-        response.sendRedirect("adminuser.do");
+        List listUser = userService.findAll();
+        HttpSession session = request.getSession();
+        session.setAttribute("User",listUser);
+        return "WEB-INF/admin/user.jsp";
     }
 
+    @RequestMapping(url = "/searchuser.do", method = RequestMethod.POST)
+    public String searchUser(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
+
+
+        String username = request.getParameter("txtSearch");
+        List userList = userService.findByName(username);
+
+        session.setAttribute("User", userList);
+
+        return "WEB-INF/admin/user.jsp";
+    }
+
+    @RequestMapping(url = "/searchjob.do", method = RequestMethod.POST)
+    public String searchJob(HttpServletRequest request, HttpServletResponse response)  {
+        String jobname = request.getParameter("txtJobName");
+        List job = jobService.findByName(jobname);
+
+        HttpSession session = request.getSession();
+        session.setAttribute("Job", job);
+
+        return  "WEB-INF/admin/job.jsp";
+    }
 }
