@@ -72,11 +72,12 @@ public class UserController {
     @RequestMapping(url = "/viewUser.do")
     public String viewUser(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession();
-        if(session.getAttribute("user") == null) {
+        User sessionUser = (User) session.getAttribute("user");
+        if(sessionUser == null) {
             return "WEB-INF/signin.jsp";
         }
         String userID = request.getParameter("userID");
-        User user = userService.find(Integer.parseInt(userID));
+        User user = userService.findByID(Integer.parseInt(userID));
         if (user == null) {
             List listJob = jobService.findByStatus(true);
             request.setAttribute("LIST_JOB", listJob);

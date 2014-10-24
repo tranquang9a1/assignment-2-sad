@@ -62,4 +62,9 @@ public class UserServiceImpl implements UserService {
     public Boolean deleteByID(Integer id) {
         return  userDAO.delete(id);
     }
+
+    @Override
+    public User findByID(int id) {
+        return  userDAO.findByID(id);
+    }
 }
