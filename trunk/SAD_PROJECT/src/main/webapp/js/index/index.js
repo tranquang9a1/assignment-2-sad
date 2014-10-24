@@ -10,15 +10,16 @@ $(document).ready(function(){
         success: function(listJob) {
             var dataString = "";
             $.each(listJob, function(index, job) {
+                var a = new Date(job.create_date)
                 dataString +=
                     "<tr>"
                         + "<td>"
-                            + "<p><a href='job.do?id='+job.jobID>" + job.jobName + "</a> <small class='label label-success'>" + job.jobName + "</small></p>"
-                            + "<p>Google Enterprises</p>"
+                            + "<p><a href='job.do?id='+job.jobID+'>" + job.jobName + "</a> <small class='label label-success'>" + job.jobName + "</small></p>"
+                            + "<p>"+job.username +"</p>"
                         + "</td>"
                         + "<td class='job-location'>"
-                            + "<p><i class='glyphicon glyphicon-calendar'></i>" +  job.jobName + "</p>"
-                            + "<p><i class='glyphicon glyphicon-map-marker'></i>" +  job.jobName + "</p>"
+                            + "<p><i class='glyphicon glyphicon-calendar'></i>" + a.toISOString().substr(0,10) + "</p>"
+                            + "<p><i class='glyphicon glyphicon-map-marker'></i>" +  job.address + "</p>"
                         + "</td>"
                     + "</tr>"
             });

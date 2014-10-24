@@ -1,5 +1,7 @@
 package sad.teamone.entity;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -21,6 +23,10 @@ public class Comment {
     @Column(name = "create_date")
     private Date create_date;
 
+    @ManyToOne
+    @JoinColumn(name = "jobID", nullable = false)
+    private Job job;
+
     @OneToOne
     @JoinColumn(name = "userID",nullable = false)
     private User user;
@@ -29,10 +35,21 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(String description, Date create_date, User user) {
+    public Comment(String description, Date create_date, Job job, User user) {
         this.description = description;
         this.create_date = create_date;
+        this.job = job;
         this.user = user;
+    }
+
+    @JsonIgnore
+    public Job getJob() {
+        return job;
+    }
+
+    @JsonIgnore
+    public void setJob(Job job) {
+        this.job = job;
     }
 
     public Integer getCommentID() {

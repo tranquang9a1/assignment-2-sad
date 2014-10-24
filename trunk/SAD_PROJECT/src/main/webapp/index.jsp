@@ -109,7 +109,7 @@
             <tr>
                 <td>
                     <h3><a href="job.do?id=${job.jobID}">${job.jobName}</a>
-                        <small class="label label-success">Full time</small>
+                        <small class="label label-success">${job.jobName}</small>
                     </h3>
                     <a href="/viewUser.do?userID=${job.userID}">${job.username}</a>
                 </td>
@@ -123,7 +123,7 @@
             <tr>
                 <td>
                     <h3><a href="job.do?id=${job.jobID}">${job.jobName}</a>
-                        <small class="label label-warning">Part time</small>
+                        <small class="label label-success">${job.jobName}</small>
                     </h3>
                     <a href="/viewUser.do?userID=${job.userID}">${job.username}</a>
                 </td>
@@ -138,7 +138,7 @@
             <tr>
                 <td>
                     <h3><a href="job.do?id=${job.jobID}">${job.jobName}</a>
-                        <small class="label label-info">Freelance</small>
+                        <small class="label label-success">${job.jobName}</small>
                     </h3>
                     <a href="/viewUser.do?userID=${job.userID}">${job.username}</a>
                 </td>
@@ -175,7 +175,10 @@
 <!-- the footer -->
 
 <jsp:include page="WEB-INF/layout/footer.jsp"/>
-<script type="text/javascript" src="js/index/index.js"></script>
+<c:if test="${empty sessionScope.user}" >
+    <script type="text/javascript" src="js/index/index.js"></script>
+</c:if>
+
 </body>
 </html>
 

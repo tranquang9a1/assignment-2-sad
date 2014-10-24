@@ -74,9 +74,9 @@
                         <div class="form-group">
                             <label>Salary</label>
                             <select class="form-control input-lg">
-                                <option>€1000 - €5000</option>
-                                <option>€5000 - €10000</option>
-                                <option>€10000+</option>
+                                <option>$1000 - $5000</option>
+                                <option>$5000 - $10000</option>
+                                <option>$10000+</option>
                             </select>
                             <small class="help-block"></small>
                         </div>
